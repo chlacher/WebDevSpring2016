@@ -113,6 +113,7 @@ body {
 }
 .navbar-fixed-top {
     top: 0;
+
     border-width: 0 0 1px;
 }
 .navbar-fixed-bottom, .navbar-fixed-top {
@@ -124,4 +125,14 @@ body {
 .navbar {
     min-height: 50px;
     margin-bottom: 20px;
+}
+
+/*
+ * My custom style elements
+ */
+
+/* Currently Selected Nav Element Appears White */
+.nav > li >
+a.curr {
+    color: #fff;
 }
