@@ -136,3 +136,21 @@ body {
 a.curr {
     color: #fff;
 }
+
+/* Add spacing for the form fields rows */
+div#form-fields > div.row {
+    padding-top: 1em;
+    padding-left: 1em;
+}
+
+/* Line up date dropdowns */
+select.date-drop{
+    display: inline;
+    width: auto;
+}
+
+/* Line up actions for larger rows */
+div.actions-lg {
+    padding-top: 1.5em;
+    padding-left: 3em;
+}
