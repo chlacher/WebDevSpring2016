@@ -15,10 +15,10 @@
                 <li ng-class="($root.path=='profile') ? 'active' : ''" class="visible-xs"><a href="#profile">Profile</a></li>
                 <li ng-class="($root.path=='admin') ? 'active' : ''" class="visible-xs"><a href="#admin">Admin</a></li>
                 <li ng-class="($root.path=='forms' || $root.path=='fields') ? 'active' : ''" class="visible-xs"><a href="#forms">Forms</a></li>
-                <li ng-class="($root.path=='register') ? 'active' : ''"><a href="#register">Register</a></li>
-                <li ng-class="($root.path=='login') ? 'active' : ''"><a href="#login">Login</a></li>
-                <li><a href="#">Username</a></li>
-                <li><a href="#">Logout</a></li>
+                <li ng-if="!$root.user" ng-class="($root.path=='register') ? 'active' : ''"><a href="#register">Register</a></li>
+                <li ng-if="!$root.user" ng-class="($root.path=='login') ? 'active' : ''"><a href="#login">Login</a></li>
+                <li ng-if="$root.user"><a href="#profile">{{ $root.user.username }}</a></li>
+                <li ng-if="$root.user"><a ng-click="logout()">Logout</a></li>
             </ul>
         </div>
     </div>

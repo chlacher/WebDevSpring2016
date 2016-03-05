@@ -19,7 +19,7 @@
 
 
 <div ng-include src="'views/header/header.view.html'"></div>
-<div ng-include src="'views/sidebar/sidebar.view.html'"></div>
+<div ng-if="$root.user" ng-include src="'views/sidebar/sidebar.view.html'"></div>
 
 <body ng-app="FormBuilderApp" ng-controller="MainController">
 
@@ -35,12 +35,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
 
+<!-- Application -->
 <script src="app.js"></script>
+
+<!-- Configuration -->
 <script src="config.js"></script>
 
 <!-- Controllers -->
 <script src="views/main/main.controller.js"></script>
-
 <script src="views/admin/admin.controller.js"></script>
 <script src="views/forms/forms.controller.js"></script>
 <script src="views/forms/fields.controller.js"></script>
@@ -51,6 +53,8 @@
 <script src="views/users/profile.controller.js"></script>
 <script src="views/users/register.controller.js"></script>
 
+<!-- Services -->
+<script src="services/user.service.client.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
