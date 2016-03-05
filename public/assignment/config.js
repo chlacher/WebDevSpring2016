@@ -25,7 +25,7 @@ angular
         }).
         when('/forms', {
             templateUrl: 'views/forms/forms.view.html',
-            controller: 'AdminController'
+            controller: 'FormsController'
         }).
         when('/fields', {
             templateUrl: 'views/forms/fields.view.html',

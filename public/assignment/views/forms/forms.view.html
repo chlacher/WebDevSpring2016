@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    {{ edit }}
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Forms</h1>
@@ -16,22 +17,18 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input id="name" placeholder="name"></td>
-                        <td><span class="glyphicon glyphicon-plus"/> <span class="glyphicon glyphicon-ok"/></td>
+                        <td><input ng-model="newForm" placeholder="name"></td>
+                        <td><span ng-click="addForm()" class="glyphicon glyphicon-plus"/></td>
                     </tr>
-                    <tr>
-                        <td>Registration Form</td>
-                        <td><span class="glyphicon glyphicon-remove"/> <span class="glyphicon glyphicon-pencil"/></td>
+                    <tr ng-repeat="form in forms">
+                        <td ng-if="edit!=form._id">{{ form.title }}</td>
+                        <td ng-if="edit==form._id"><input ng-model="form.title"></td>
+                        <td>
+                            <span ng-click="deleteForm(form._id)" class="glyphicon glyphicon-remove"/>
+                            <span ng-if="edit!=form._id" ng-click="selectForm(form._id)" class="glyphicon glyphicon-pencil"/>
+                            <span ng-if="edit==form._id" ng-click="updateForm(form._id, form)" class="glyphicon glyphicon-ok"/></td>
                     </tr>
-                    <tr>
-                        <td>Contact List</td>
-                        <td><span class="glyphicon glyphicon-remove"/> <span class="glyphicon glyphicon-pencil"/></td>
                     </tr>
-                    <tr>
-                        <td>To Do List</td>
-                        <td><span class="glyphicon glyphicon-remove"/> <span class="glyphicon glyphicon-pencil"/></td>
-                    </tr>
-                    </tbody>
                 </table>
             </div>
         </div>
