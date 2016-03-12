@@ -1,0 +1,13 @@
+<div class="myBackdrop" ng-click="closeModal()">
+    <div class="row">
+        <div class="blue col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
+            <h1>Blue Team <small id="bl-percent">50%</small></h1>
+            <a ng-click="openModal('champselect')">Test: Open Modal</a>
+        </div>
+        <div class="col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
+            Red Team
+        </div>
+    </div>
+</div>
+
+<div ng-include src="'views/champselect/champselect.view.html'"></div>
