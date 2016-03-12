@@ -36,12 +36,21 @@ function HomeController($scope, $rootScope, $http) {
         console.log("Opening Modal: " + modal);
         $rootScope.modals[modal] = true;
         console.log($rootScope.modals);
-    }
+    };
 
     $rootScope.closeModal = function(modal){
         $rootScope.modals[modal] = false;
         updateIcons();
-    }
+    };
+
+    var champQuery = "http://api.champion.gg/champion?api_key=073f59ba919b9d8746d0efebaf49b2dd"
+    $http.get(champQuery) // load model with delay
+        .success(function(json) {
+            console.log(json);
+        });
+
+
+
 
     updateIcons();
 
