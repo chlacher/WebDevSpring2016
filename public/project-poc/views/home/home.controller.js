@@ -10,8 +10,10 @@ function HomeController($scope, $rootScope, $http) {
 
     var defaultIcon = "http://i.imgur.com/H8cydTK.png"
 
+    // Using Common Index Instead of Object for Simplicity
+    $scope.summoners = new Array(10);
+    $scope.roles = new Array(10);
     $rootScope.champions = new Array(10);
-
     $scope.icons = new Array(10);
 
     var updateIcons = function(){
