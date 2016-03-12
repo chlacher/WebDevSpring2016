@@ -1,11 +1,11 @@
-<div ng-controller="ChampSelectController" class="myModal" ng-show="$root.modals['champselect']" style="position:fixed;left:5%;width:80%;height:66%;border: solid;">
+<div ng-controller="ChampSelectController" class="myModal" ng-show="$root.modals['champselect']" style="position:fixed;left:5%;top:15%;width:80%;height:66%;border: solid; background-color: sandybrown">
     <a style="padding:1em" class="pull-right" ng-click="$root.closeModal('champselect')">X</a>
     <h1 style="text-align:center">Select a Champion</h1>
     <div class="row" style="width:90%;margin-left:5%">
         <input type="text" class="form-control" ng-model="query" ng-change="filter()">
     </div>
     <div style="overflow-y:scroll;overflow-x:hidden;border:solid;height:62%;width:95%;margin:3%">
-        <span ng-repeat="champ in filtered">
+        <span ng-repeat="champ in filtered" ng-click="choose(champ)">
             <img style="-webkit-user-select: none; padding: 1px;" src="http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/{{champ}}.png">
         </span>
     </div>

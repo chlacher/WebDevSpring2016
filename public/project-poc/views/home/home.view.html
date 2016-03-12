@@ -2,10 +2,15 @@
     <div class="row">
         <div class="blue col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
             <h1>Blue Team <small id="bl-percent">50%</small></h1>
-            <a ng-click="openModal('champselect')">Test: Open Modal</a>
+            <div ng-repeat="n in [0,1,2,3,4]" ng-click="selectChamp(n)" style="padding:1em">
+                <img style="width:120px;height:120px" src="{{icons[n]}}">
+            </div>
         </div>
-        <div class="col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
-            Red Team
+        <div class="red col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
+            <h1>Red Team <small id="bl-percent">50%</small></h1>
+            <div ng-repeat="n in [5,6,7,8,9]" ng-click="selectChamp(n)" style="padding:1em">
+                <img style="width:120px;height:120px" src="{{icons[n]}}">
+            </div>
         </div>
     </div>
 </div>

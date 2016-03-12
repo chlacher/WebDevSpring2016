@@ -2,10 +2,10 @@
 
 angular
     .module('LoLCompApp')
-    .controller('ChampSelectController', ['$scope', "$http", ChampSelectController]);
+    .controller('ChampSelectController', ['$scope', '$rootScope', "$http", ChampSelectController]);
 
 
-function ChampSelectController($scope, $http) {
+function ChampSelectController($scope, $rootScope, $http) {
     // Modal functionality
     $scope.flag = {
         modalOpen: true
@@ -46,4 +46,9 @@ function ChampSelectController($scope, $http) {
             });
         }
     };
+
+    $scope.choose = function(champ){
+        $rootScope.champions[$rootScope.summoner] = champ;
+        $rootScope.closeModal('champselect');
+    }
 }

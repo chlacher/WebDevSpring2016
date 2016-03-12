@@ -74,3 +74,8 @@ body {
 .blue {
     color: rgba(0, 110, 140, 1);
 }
+
+/* Red Team attributes */
+.red {
+    color: rgba(230, 22, 16, 1);
+}
