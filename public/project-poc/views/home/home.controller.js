@@ -16,6 +16,7 @@ function HomeController($scope, $rootScope, $http) {
     $rootScope.champions = new Array(10);
     $scope.icons = new Array(10);
 
+    // Updates Icons With Appropriate Champions
     var updateIcons = function(){
         for (var n = 0; n<10; n++){
             var champ = $rootScope.champions[n];
@@ -27,30 +28,24 @@ function HomeController($scope, $rootScope, $http) {
         }
     };
 
+    // Triggers process to select a champion
     $scope.selectChamp = function(n){
         $rootScope.summoner = n;
         $scope.openModal('champselect');
     };
 
+    // Opens selected modal (made modular, but only used once)
     $scope.openModal = function(modal){
         console.log("Opening Modal: " + modal);
         $rootScope.modals[modal] = true;
         console.log($rootScope.modals);
     };
 
+    // Closes selected modal (attached to root so can be closed from modal controller)
     $rootScope.closeModal = function(modal){
         $rootScope.modals[modal] = false;
         updateIcons();
     };
-
-    var champQuery = "http://api.champion.gg/champion?api_key=073f59ba919b9d8746d0efebaf49b2dd"
-    $http.get(champQuery) // load model with delay
-        .success(function(json) {
-            console.log(json);
-        });
-
-
-
 
     updateIcons();
 
