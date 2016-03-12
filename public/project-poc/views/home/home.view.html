@@ -1,10 +1,10 @@
-<div class="myBackdrop" ng-click="closeModal()" style="margin-top:3em">
+<div class="backdrop">
     <div class="row">
         <div class="blue col-md-5 col-md-offset-1">
             <h1>Blue Team <small id="bl-percent">50%</small></h1>
-            <div ng-repeat="n in [0,1,2,3,4]" style="padding:1em">
+            <div class="champDisp" ng-repeat="n in [0,1,2,3,4]">
                 <div class="row">
-                        <img ng-click="selectChamp(n)" style="width:120px;height:120px" src="{{icons[n]}}">
+                        <img class="champIcon" ng-click="selectChamp(n)" src="{{icons[n]}}">
                     <div class="col-md-6">
                         <input class="form-control" placeholder="Summoner Name">
                         <select class="form-control">
@@ -22,9 +22,9 @@
         </div>
         <div class="red col-md-5">
             <h1>Red Team <small id="bl-percent">50%</small></h1>
-            <div ng-repeat="n in [5,6,7,8,9]" style="padding:1em">
+            <div class="champDisp" ng-repeat="n in [5,6,7,8,9]">
                 <div class="row">
-                    <img ng-click="selectChamp(n)" style="width:120px;height:120px;float: left;" src="{{icons[n]}}">
+                    <img class="champIcon left" ng-click="selectChamp(n)" src="{{icons[n]}}">
                     <div class="col-md-6">
                         <input class="form-control" placeholder="Summoner Name">
                         <select class="form-control">

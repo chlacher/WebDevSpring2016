@@ -79,3 +79,50 @@ body {
 .red {
     color: rgba(230, 22, 16, 1);
 }
+
+.backdrop {
+    margin-top:3em;
+}
+
+.champDisp {
+    padding:1em;
+}
+
+.champIcon {
+    width:120px;
+    height:120px;
+    padding: 1px;
+}
+.left {
+    float: left;
+}
+.closeModal {
+    padding:1em;
+    font-weight: 900;
+}
+.center {
+    text-align: center;
+}
+
+.myModal {
+    position:fixed;
+    left:5%;
+    top:10%;
+    width:85%;
+    height:75%;
+    border: solid;
+    background-color:sandybrown;
+}
+.modal-content{
+    width:90%;
+    margin-left:5%;
+}
+.modal-scrollable{
+    overflow-y:scroll;
+    overflow-x:hidden;
+    border:solid;
+    height:62%;
+    width:95%;
+    margin:3%;
+    background-color: navajowhite;
+}
