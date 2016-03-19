@@ -9,6 +9,7 @@ angular
                 method: 'GET',
                 url: root + "/name/" + username
             }).then(function successCallback(response) {
+                console.log("response");
                 return response.data;
             }, function errorCallback(response) {
                 // Something went wrong
