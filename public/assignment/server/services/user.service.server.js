@@ -41,6 +41,9 @@ module.exports = function (app, model) {
     function updateUserById (req, res) {
         var id = req.params.id;
         var user = req.body;
+        console.log("updateUser:");
+        console.log(req);
+        console.log(req.body);
         res.json(model.updateUser(id, user));
     }
 
