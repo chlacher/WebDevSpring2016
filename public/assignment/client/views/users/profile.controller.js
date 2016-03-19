@@ -20,14 +20,16 @@ function ProfileController($scope, $location, $rootScope, UserService) {
             user.password = $scope.password;
         }
         if ($scope.firstname){
-            user.firstname = $scope.firstname;
+            user.firstName = $scope.firstname;
         }
         if ($scope.lastname){
-            user.lastname = $scope.lastname;
+            user.lastName = $scope.lastname;
         }
         if ($scope.email){
             user.email = $scope.email;
         }
+        console.log(user);
+        console.log(user.id);
         UserService.updateUser(user.id, user, attemptUpdate);
     }
 
