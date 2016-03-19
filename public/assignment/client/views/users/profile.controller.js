@@ -10,7 +10,9 @@ function ProfileController($scope, $location, $rootScope, UserService) {
     $scope.update = function(){
         var user = $rootScope.user;
         if ($scope.username){
-            if (UserService.findUserByUsername($scope.username) != null){
+            var foo = UserService.findUserByUsername($scope.username);
+            console.log(foo);
+            if (foo != null){
                 // TODO: Throw Exception: Username already in use
                 return null;
             }
