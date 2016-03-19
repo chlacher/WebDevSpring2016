@@ -66,7 +66,7 @@ angular
         fac.updateUser = function(userId, user, callback){
             return $http({
                 method: 'PUT',
-                url: root + "/",
+                url: root + "/" + userId,
                 data: {body: user}
             }).then(function successCallback(response) {
                 return callback(response.data);
