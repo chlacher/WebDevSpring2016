@@ -5,7 +5,7 @@ angular
     var fac = {};
         var root = "http://" + $location.host() + "/api/assignment/user";
         fac.findUserByUsername = function(username){
-            return $http({
+            $http({
                 method: 'GET',
                 url: root + "/name/" + username
             }).then(function successCallback(response) {
@@ -19,7 +19,7 @@ angular
             });
         };
         fac.findUserByCredentials = function(username, password, callback){
-            return $http({
+            $http({
                 method: 'GET',
                 url: root + "/creds/" + username + "/" + password
             }).then(function successCallback(response) {
@@ -30,7 +30,7 @@ angular
             });
         }
         fac.findAllUsers = function(callback){
-            return $http({
+            $http({
                 method: 'GET',
                 url: root + "/"
             }).then(function successCallback(response) {
@@ -44,7 +44,7 @@ angular
             if (fac.findUserByUsername(user.username)){
                 return callback(null);
             }
-            return $http({
+            $http({
                 method: 'POST',
                 url: root + "/",
                 data: {body: user}
@@ -56,7 +56,7 @@ angular
             });
         };
         fac.deleteUserById = function(userId, callback){
-            return $http({
+            $http({
                 method: 'DELETE',
                 url: root + "/" + userId
             }).then(function successCallback(response) {
@@ -67,7 +67,7 @@ angular
             });
         };
         fac.updateUser = function(userId, user, callback){
-            return $http({
+            $http({
                 method: 'PUT',
                 url: root + "/" + userId,
                 data: {body: user}
