@@ -30,7 +30,7 @@ function ProfileController($scope, $location, $rootScope, UserService) {
         }
         console.log(user);
         console.log(user.id);
-        UserService.updateUser(user.id, user, attemptUpdate);
+        UserService.updateUser(user._id, user, attemptUpdate);
     }
 
     var attemptUpdate = function(user){
