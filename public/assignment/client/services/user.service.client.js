@@ -1,29 +1,79 @@
 angular
     .module('FormBuilderApp')
-    .factory('UserService', function($http){
+    .factory('UserService', function($http, $location){
 
     var fac = {};
-
+        var root = "http://" + $location.host() + "/api/assignment/user";
         fac.findUserByUsername = function(username){
-            return $http.get("/api/assignment/user?username=" + username);
+            return $http({
+                method: 'GET',
+                url: root + "/name/" + username
+            }).then(function successCallback(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                // Something went wrong
+                return null;
+            });
         };
         fac.findUserByCredentials = function(username, password, callback){
-            return callback($http.get("api/assignment/user?username=" + username + "&password=" + password));
-        };
+            return $http({
+                method: 'GET',
+                url: root + "/creds/" + username + "/" + password
+            }).then(function successCallback(response) {
+                return callback(response.data);
+            }, function errorCallback(response) {
+                // Something went wrong
+                return null;
+            });
+        }
         fac.findAllUsers = function(callback){
-            return callback($http.get("/api/assignment/user"));
+            return $http({
+                method: 'GET',
+                url: root + "/"
+            }).then(function successCallback(response) {
+                return callback(response.data);
+            }, function errorCallback(response) {
+                // Something went wrong
+                return null;
+            });
         };
         fac.createUser = function(user, callback){
             if (fac.findUserByUsername(user.username)){
                 return callback(null);
             }
-            return callback($http.post("/api/assignment/user", {body: user}));
+            return $http({
+                method: 'POST',
+                url: root + "/",
+                data: {body: user}
+            }).then(function successCallback(response) {
+                return callback(response.data);
+            }, function errorCallback(response) {
+                // Something went wrong
+                return null;
+            });
         };
         fac.deleteUserById = function(userId, callback){
-            return callback($http.delete("/api/assignment/user?id=" + userId));
+            return $http({
+                method: 'DELETE',
+                url: root + "/" + userId
+            }).then(function successCallback(response) {
+                return callback(response.data);
+            }, function errorCallback(response) {
+                // Something went wrong
+                return null;
+            });
         };
         fac.updateUser = function(userId, user, callback){
-            return callback($http.put("/api/assignment/user?id=" + userId, {body: user}));
+            return $http({
+                method: 'PUT',
+                url: root + "/",
+                data: {body: user}
+            }).then(function successCallback(response) {
+                return callback(response.data);
+            }, function errorCallback(response) {
+                // Something went wrong
+                return null;
+            });
         };
 
         return fac;
