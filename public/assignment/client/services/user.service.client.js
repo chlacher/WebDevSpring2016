@@ -47,7 +47,7 @@ angular
             $http({
                 method: 'POST',
                 url: root + "/",
-                data: {body: user}
+                data: user
             }).then(function successCallback(response) {
                 return callback(response.data);
             }, function errorCallback(response) {
@@ -67,13 +67,18 @@ angular
             });
         };
         fac.updateUser = function(userId, user, callback){
+            console.log("fac.updateUser");
             $http({
                 method: 'PUT',
                 url: root + "/" + userId,
-                data: {body: user}
+                data: user
             }).then(function successCallback(response) {
+                console.log("updateUser:");
+                console.log(response);
+                console.log(response.data);
                 return callback(response.data);
             }, function errorCallback(response) {
+                console.log("Bad thing!!!!!");
                 // Something went wrong
                 return null;
             });
