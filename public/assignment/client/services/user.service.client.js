@@ -10,6 +10,8 @@ angular
                 url: root + "/name/" + username
             }).then(function successCallback(response) {
                 console.log("response");
+                console.log(response);
+                console.log(response.data);
                 return response.data;
             }, function errorCallback(response) {
                 // Something went wrong
