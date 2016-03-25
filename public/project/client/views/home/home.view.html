@@ -4,7 +4,7 @@
             <h1>Blue Team <small id="bl-percent">50%</small></h1>
             <div class="champDisp" ng-repeat="n in [0,1,2,3,4]">
                 <div class="row">
-                        <img class="champIcon" ng-click="selectChamp(n)" src="{{icons[n]}}">
+                        <img class="champIcon" ng-click="selectChamp(n)" src="{{ summoners[n].icon }}">
                     <div class="col-md-6">
                         <input class="form-control" placeholder="Summoner Name">
                         <select class="form-control">
@@ -24,7 +24,7 @@
             <h1>Red Team <small id="bl-percent">50%</small></h1>
             <div class="champDisp" ng-repeat="n in [5,6,7,8,9]">
                 <div class="row">
-                    <img class="champIcon left" ng-click="selectChamp(n)" src="{{icons[n]}}">
+                    <img class="champIcon" ng-click="selectChamp(n)" src="{{ summoners[n].icon }}">
                     <div class="col-md-6">
                         <input class="form-control" placeholder="Summoner Name">
                         <select class="form-control">
@@ -44,3 +44,4 @@
 </div>
 
 <div ng-include src="'views/champselect/champselect.view.html'"></div>
+<div ng-include src="'views/login/login.view.html'"></div>

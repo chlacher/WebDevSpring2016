@@ -1,12 +1,12 @@
-<div ng-controller="ChampSelectController" class="myModal" ng-show="$root.modals['champselect']">
-    <a class="closeModal pull-right" ng-click="$root.closeModal('champselect')">X</a>
+<div ng-controller="ChampSelectController" class="champModal" ng-show="open">
+    <a class="closeModal pull-right" ng-click="close()">X</a>
     <h1 class="center">Select a Champion</h1>
     <div class="row modal-content">
         <input type="text" class="form-control" ng-model="query" ng-change="filter()">
     </div>
     <div class="modal-scrollable">
         <span ng-repeat="champ in filtered" ng-click="choose(champ)">
-            <img class="champIcon" src="http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/{{champ}}.png">
+            <img class="champIcon" src="http://ddragon.leagueoflegends.com/cdn/{{$root.version}}/img/champion/{{champ}}.png">
         </span>
     </div>
 </div>

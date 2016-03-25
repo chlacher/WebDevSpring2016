@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public/'));
 // Server
 require("./public/assignment/server/app.js")(app);
+require("./public/project/server/app.js")(app);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;

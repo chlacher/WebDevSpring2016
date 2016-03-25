@@ -104,7 +104,7 @@ body {
     text-align: center;
 }
 
-.myModal {
+.champModal {
     position:fixed;
     left:5%;
     top:10%;
@@ -113,6 +113,17 @@ body {
     border: solid;
     background-color:sandybrown;
 }
+
+.loginModal {
+    position:fixed;
+    top:20%;
+    left: 35%;
+    width: 30%;
+    height: 30%;
+    background-color:gray;
+    border: solid;
+}
+
 .modal-content{
     width:90%;
     margin-left:5%;
@@ -126,6 +137,6 @@ body {
     margin:3%;
     background-color: navajowhite;
 }
-.region{
+.padded{
     padding: 1em;
 }

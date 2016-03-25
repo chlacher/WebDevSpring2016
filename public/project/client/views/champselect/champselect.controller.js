@@ -2,30 +2,18 @@
 
 angular
     .module('LoLCompApp')
-    .controller('ChampSelectController', ['$scope', '$rootScope', "$http", ChampSelectController]);
+    .controller('ChampSelectController', ['$scope', '$rootScope', "ModalService", "SummonerService", "RiotAPIService", ChampSelectController]);
 
 
-function ChampSelectController($scope, $rootScope, $http) {
-    // Modal functionality
-    $scope.flag = {
-        modalOpen: true
+function ChampSelectController($scope, $rootScope, ModalService, SummonerService, RiotAPIService) {
+
+    if (!$rootScope.region){
+        $rootScope.region = 'na';
     }
-
-    var champQuery = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=373db961-91ff-4b7c-9124-30d883f17951"
 
     var champs = [];
     $scope.query = "";
     $scope.filtered = [];
-
-    // Get list of champions from riot API
-    $http.get(champQuery)
-        .success(function(json) {
-            // Push each champion's name into a local array
-            $.each(json.data, function(champ){
-                champs.push(champ);
-            });
-            $scope.filtered = champs;
-        });
 
     // Filter array to those matching query
     $scope.filter = function() {
@@ -43,7 +31,35 @@ function ChampSelectController($scope, $rootScope, $http) {
 
     // Set the summoner's champion to the one clicked, close the modal
     $scope.choose = function(champ){
-        $rootScope.champions[$rootScope.summoner] = champ;
-        $rootScope.closeModal('champselect');
-    }
+        SummonerService.chooseChamp(champ);
+        ModalService.closeModal('champselect');
+    };
+
+    // Close the modal without updating anything
+    $scope.close = function(){
+        ModalService.closeModal('champselect');
+    };
+
+    // Hit the Riot API and get all the champion names
+    var getChamps = function() {
+        var champQuery = "/api/lol/static-data/" + $rootScope.region + "/v1.2/champion";
+        // Populate local variables with list of all champions
+        RiotAPIService.GET(champQuery, function(champions){
+            $rootScope.version = champions.version;
+            $.each(champions.data, function(champ){
+                champs.push(champ);
+            });
+            $scope.filtered = champs;
+        });
+    };
+
+    // Whether or not this modal should be open
+    var modalStatus = function(){
+        $scope.open = ModalService.modals['champselect'];
+    };
+    // Listen for change in modal status
+    ModalService.listen(modalStatus);
+
+    getChamps();
+    modalStatus();
 }

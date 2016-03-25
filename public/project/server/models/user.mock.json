@@ -1,0 +1,4 @@
+[
+  {"_id": 123, "username": "DunderBear", "password": "12345", "summonername": "DunderBear", "region": "NA", "rank": "Platinum"},
+  {"_id": 123, "username": "fake", "password": "fake", "summonername": "Faker", "region": "KR", "rank": "Challenger"}
+]

@@ -1,0 +1,13 @@
+<div ng-controller="LoginController" class="loginModal center" ng-show="open">
+    <a class="closeModal pull-right" ng-click="close()">X</a>
+
+    <!--<div class="center col-xs-10">-->
+    <h1>Login</h1>
+        <form class="form-horizontal">
+                <input ng-model="username" class="form-control" id="inputUser3" placeholder="Username">
+                <input ng-model="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            <button ng-click="login()" class="btn form-control btn-default">Login</button>
+            <div class="red">{{error}}</div>
+        </form>
+    <!--</div>-->
+</div>
