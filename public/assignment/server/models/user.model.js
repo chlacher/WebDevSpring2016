@@ -41,10 +41,10 @@ module.exports = function(users) {
         for (var idx in users) {
             if (users[idx]._id == id) {
                 users[idx] = user;
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
     };
 
     api.deleteUser = function(id) {

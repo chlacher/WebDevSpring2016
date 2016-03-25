@@ -28,8 +28,6 @@ function ProfileController($scope, $location, $rootScope, UserService) {
         if ($scope.email){
             user.email = $scope.email;
         }
-        console.log(user);
-        console.log(user.id);
         UserService.updateUser(user._id, user, attemptUpdate);
     }
 
