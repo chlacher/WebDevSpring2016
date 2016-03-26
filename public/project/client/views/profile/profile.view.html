@@ -1,0 +1,14 @@
+<div ng-controller="ProfileController" class="regModal center" ng-show="open">
+    <a class="closeModal pull-right" ng-click="close()">X</a>
+
+    <h1>Profile</h1>
+        <form class="form-horizontal">
+            <input ng-model="data.username" class="form-control" placeholder="Username">
+            <input ng-model="data.password" type="password" class="form-control" placeholder="Password">
+            <input ng-model="data.summoner" class="form-control" placeholder="Summoner Name">
+            <select class="form-control" data-ng-options="r for r in $root.ranks" data-ng-model="data.rank"></select>
+            <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="data.region"></select>
+            <button ng-click="update()" class="btn form-control btn-default">Update</button>
+            <div class="red">{{error}}</div>
+        </form>
+</div>

@@ -44,11 +44,15 @@ function UserService(APIService){
         APIService.POST("user/", {
             "username": data.username,
             "password": data.password,
-            "summonername": data.summoner,
+            "summoner": data.summoner,
             "region": data.region,
             "rank": data.rank
         }, callback);
 
+    };
+
+    fac.tryUpdate = function(data, callback){
+        APIService.PUT("user/" + data._id, data, callback);
     };
 
     // Listeners: callback functions that will be hit on update
@@ -65,10 +69,6 @@ function UserService(APIService){
             listeners[i]();
         }
     };
-
-    //fac.updateUser = function(userId, user, callback){
-    //    APIService.PUT("user/" + userId, user, callback);
-    //};
 
     return fac;
 

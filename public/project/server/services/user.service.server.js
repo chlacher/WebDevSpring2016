@@ -3,7 +3,7 @@ module.exports = function (app, model) {
     app.get("/api/project/user/:username/:password", login);
     app.get("/api/project/user/:username", getUserByUsername);
     app.post("/api/project/user/", createUser);
-    //app.put("/api/assignment/user/:id", updateUserById);
+    app.put("/api/project/user/:id", updateUserById);
 
     function login (req, res){
         var u = req.params.username;
@@ -25,9 +25,9 @@ module.exports = function (app, model) {
         res.json(model.createUser(user));
     }
 
-    //function updateUserById (req, res) {
-    //    var id = req.params.id;;
-    //    var user = req.body;
-    //    res.json(model.updateUser(id, user));
-    //}
+    function updateUserById (req, res) {
+        var id = req.params.id;;
+        var user = req.body;
+        res.json(model.updateUser(id, user));
+    }
 };

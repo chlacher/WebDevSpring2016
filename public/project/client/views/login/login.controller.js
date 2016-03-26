@@ -2,10 +2,10 @@
 
 angular
     .module('LoLCompApp')
-    .controller('LoginController', ['$scope', '$rootScope', "ModalService", "UserService", LoginController]);
+    .controller('LoginController', ['$scope', "ModalService", "UserService", LoginController]);
 
 
-function LoginController($scope, $rootScope, ModalService, UserService) {
+function LoginController($scope, ModalService, UserService) {
     $scope.username = "";
     $scope.password = "";
 

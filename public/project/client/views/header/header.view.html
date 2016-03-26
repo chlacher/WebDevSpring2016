@@ -19,7 +19,7 @@
                 </ul>
             </div>
             <div ng-if="user._id" class="nav navbar-nav navbar-right padded">
-                <p class="form-control">Welcome, <a>{{user.summonername}}</a></p>
+                <p class="form-control">Welcome, <a ng-click="profile()">{{user.summoner}}</a></p>
             </div>
         </div>
 </div>
