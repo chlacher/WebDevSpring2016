@@ -3,7 +3,6 @@
         <div class="navbar-header">
             <h1>LoLComps <small class="hidden-xs">Draft Winning Teams</small></h1>
         </div>
-
         <div>
             <div class="nav navbar-nav navbar-right padded">
                 <input ng-if="!user._id" class="form-control" type="button" value="Login" ng-click="login()">
@@ -12,10 +11,10 @@
             <div>
                 <ul class="nav navbar-nav navbar-right padded">
                     <li>
-                        <select class="form-control" data-ng-options="r for r in ranks" data-ng-model="user.rank"></select>
+                        <select class="form-control" data-ng-options="r for r in $root.ranks" data-ng-model="user.rank"></select>
                     </li>
                     <li>
-                        <select class="form-control" data-ng-options="r for r in regions" data-ng-model="user.region"></select>
+                        <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="user.region"></select>
                     </li>
                 </ul>
             </div>
@@ -23,20 +22,5 @@
                 <p class="form-control">Welcome, <a>{{user.summonername}}</a></p>
             </div>
         </div>
-
-        <!--<ul class="nav navbar-nav navbar-right padded">-->
-            <!--<li ng-if="user._id"><a>Welcome, {{user.summonername}}!</a></li>-->
-            <!--<li>-->
-                <!--<select class="form-control" data-ng-options="r for r in ranks" data-ng-model="user.rank"></select>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<select class="form-control" data-ng-options="r for r in regions" data-ng-model="user.region"></select>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<input ng-if="!user._id" class="form-control" type="button" value="Login" ng-click="login()">-->
-                <!--<input ng-if="user._id" class="form-control" type="button" value="Logout" ng-click="logout()">-->
-            <!--</li>-->
-        <!--</ul>-->
-
 </div>
 </nav>

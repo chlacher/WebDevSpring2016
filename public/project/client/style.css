@@ -124,6 +124,16 @@ body {
     border: solid;
 }
 
+.regModal {
+    position:fixed;
+    top:20%;
+    left: 35%;
+    width: 30%;
+    height: 60%;
+    background-color:gray;
+    border: solid;
+}
+
 .modal-content{
     width:90%;
     margin-left:5%;

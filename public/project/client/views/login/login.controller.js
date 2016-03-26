@@ -27,6 +27,11 @@ function LoginController($scope, $rootScope, ModalService, UserService) {
         }
     };
 
+    $scope.register = function(){
+        ModalService.closeModal('login');
+        ModalService.openModal('register');
+    };
+
     // Close the modal without updating anything
     $scope.close = function(){
         ModalService.closeModal('login');

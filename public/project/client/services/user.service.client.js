@@ -20,12 +20,35 @@ function UserService(APIService){
     };
 
     fac.tryLogin = function(username, password, callback) {
-        APIService.GET("login/" + username + "/" + password, callback);
+        APIService.GET("user/" + username + "/" + password, callback);
     };
 
     fac.logout = function(){
         fac.user = defaultUser;
         fac.update();
+    };
+
+    fac.tryRegister = function(data, callback){
+        // Parse for errors
+        if (data.password.length < 3){
+            return callback(null, "Password does not meet requirements");
+        } else if (data.password != data.confirm) {
+            return callback(null, "Passwords do not match");
+        }
+        var user = APIService.GET("user/" + data.username, function(u){return u});
+        if (user){
+            return callback(null, "User Already Exists");
+        }
+
+        // Create User
+        APIService.POST("user/", {
+            "username": data.username,
+            "password": data.password,
+            "summonername": data.summoner,
+            "region": data.region,
+            "rank": data.rank
+        }, callback);
+
     };
 
     // Listeners: callback functions that will be hit on update
@@ -43,31 +66,10 @@ function UserService(APIService){
         }
     };
 
+    //fac.updateUser = function(userId, user, callback){
+    //    APIService.PUT("user/" + userId, user, callback);
+    //};
 
-
-        //fac.findUserByUsername = function(username){
-        //    APIService.GET("user/name/" + username, function(response){
-        //        return response;
-        //    });
-        //};
-
-
-        //fac.findAllUsers = function(callback){
-        //    APIService.GET("user/", callback);
-        //};
-        //fac.createUser = function(user, callback){
-        //    if (fac.findUserByUsername(user.username)){
-        //        return callback(null);
-        //    }
-        //    APIService.POST("user/", user, callback);
-        //};
-        //fac.deleteUserById = function(userId, callback){
-        //    APIService.DELETE("user/" + userId, callback);
-        //};
-        //fac.updateUser = function(userId, user, callback){
-        //    APIService.PUT("user/" + userId, user, callback);
-        //};
-
-        return fac;
+    return fac;
 
 };

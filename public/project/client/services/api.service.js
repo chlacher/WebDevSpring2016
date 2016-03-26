@@ -11,9 +11,6 @@ angular
                 method: 'GET',
                 url: root + url
             }).then(function successCallback(response) {
-                //console.log("response");
-                //console.log(response);
-                //console.log(response.data);
                 return callback(response.data);
             }, function errorCallback(response) {
                 // Something went wrong

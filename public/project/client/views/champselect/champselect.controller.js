@@ -2,14 +2,10 @@
 
 angular
     .module('LoLCompApp')
-    .controller('ChampSelectController', ['$scope', '$rootScope', "ModalService", "SummonerService", "RiotAPIService", ChampSelectController]);
+    .controller('ChampSelectController', ['$scope', '$rootScope', "ModalService", "SummonerService", "RiotAPIService",'UserService', ChampSelectController]);
 
 
-function ChampSelectController($scope, $rootScope, ModalService, SummonerService, RiotAPIService) {
-
-    if (!$rootScope.region){
-        $rootScope.region = 'na';
-    }
+function ChampSelectController($scope, $rootScope, ModalService, SummonerService, RiotAPIService, UserService) {
 
     var champs = [];
     $scope.query = "";
@@ -41,8 +37,9 @@ function ChampSelectController($scope, $rootScope, ModalService, SummonerService
     };
 
     // Hit the Riot API and get all the champion names
-    var getChamps = function() {
-        var champQuery = "/api/lol/static-data/" + $rootScope.region + "/v1.2/champion";
+    var getChamps = function(region) {
+        champs = [];
+        var champQuery = "/api/lol/static-data/" + region.toLowerCase() + "/v1.2/champion";
         // Populate local variables with list of all champions
         RiotAPIService.GET(champQuery, function(champions){
             $rootScope.version = champions.version;
@@ -57,9 +54,15 @@ function ChampSelectController($scope, $rootScope, ModalService, SummonerService
     var modalStatus = function(){
         $scope.open = ModalService.modals['champselect'];
     };
-    // Listen for change in modal status
     ModalService.listen(modalStatus);
 
-    getChamps();
+    // Current User (if exists)
+    var userStatus = function(){
+        getChamps(UserService.user.region);
+    };
+    // Listen for change in modal status
+    UserService.listen(userStatus);
+
+    userStatus();
     modalStatus();
 }
