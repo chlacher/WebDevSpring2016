@@ -1,8 +1,12 @@
-module.exports = function (app) {
-    var users = require("./models/user.mock.json");
+module.exports = function (app, db) {
+
+
+    var data = require("./db.js")(db);
+
+    var users =require("./models/user.mock.json");
     var forms = require("./models/form.mock.json");
 
-    var userModel = require("./models/user.model.js")(users);
+    var userModel = require("./models/user.model.js")(users, data.User);
     var formModel = require("./models/form.model.js")(forms);
 
     var userService = require("./services/user.service.server.js")(app, userModel);
