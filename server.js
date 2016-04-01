@@ -8,10 +8,15 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Connect to DB
+var db = require('mongoose');
+var assignment_db = 'mongodb://localhost/assignment';
+db.connect(assignment_db);
+
 // Client
 app.use(express.static(__dirname + '/public/'));
 // Server
-require("./public/assignment/server/app.js")(app);
+require("./public/assignment/server/app.js")(app, db);
 require("./public/project/server/app.js")(app);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

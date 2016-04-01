@@ -1,42 +1,49 @@
-module.exports = function(users) {
+module.exports = function(users, User) {
+
     var api = {};
 
-    api.findAllUsers = function() {
-        return users;
+    api.findAllUsers = function(cb) {
+        User.find({}, function(err, users){
+            cb(users);
+        });
     };
 
-    api.findUserById = function(id) {
-        for (var idx in users) {
-            if (users[idx]._id == id)
-                return users[idx];
-        }
-        return null;
+    api.findUserById = function(id, cb) {
+        User.find({"_id": id}, function(err, users){
+            if (err || !users){
+                cb(null);
+            } else {
+                cb(users[0]);
+            }
+        });
     };
 
-    api.findUserByUsername = function(username) {
-        for (var idx in users) {
-            if (users[idx].username === username)
-                return users[idx];
-        }
-        return null;
+    api.findUserByUsername = function(username, cb) {
+        User.find({"username": username}, function(err, users){
+            if (err || !users){
+                cb(null);
+            } else {
+                cb(users[0]);
+            }
+        });
     };
 
-    api.findUserByCredentials = function(creds) {
-        for (var idx in users) {
-            if (users[idx].username == creds.username &&
-                users[idx].password == creds.password)
-                return users[idx];
-        }
-        return null;
+    api.findUserByCredentials = function(creds, cb) {
+        User.find({"username": creds.username, "password": creds.password}, function(err, users){
+            if (err || !users){
+                cb(null);
+            } else {
+                cb(users[0]);
+            }
+        });
     };
 
-    api.createUser = function(user) {
-        var now = new Date();
-        user._id = now.getTime();
-        users.push(user);
-        return users;
+    api.createUser = function(user, cb) {
+        User.create(user, function(error, doc){
+            cb(user);
+        });
     };
-
+    // TODO
     api.updateUser = function(id, user) {
         for (var idx in users) {
             if (users[idx]._id == id) {
@@ -46,7 +53,7 @@ module.exports = function(users) {
         }
         return null;
     };
-
+    // TODO
     api.deleteUser = function(id) {
         for (var idx in users) {
             if (users[idx]._id == id) {
