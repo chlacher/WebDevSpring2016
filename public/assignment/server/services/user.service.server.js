@@ -42,11 +42,13 @@ module.exports = function (app, model) {
             res.json(newUser);
         });
     }
-    // TODO
+
     function updateUserById (req, res) {
         var id = req.params.id;
         var user = req.body;
-        res.json(model.updateUser(id, user));
+        model.updateUser(id, user, function(user){
+            res.json(user);
+        });
     }
     // TODO
     function deleteUserById (req, res) {

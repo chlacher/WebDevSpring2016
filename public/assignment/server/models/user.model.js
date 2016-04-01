@@ -43,15 +43,17 @@ module.exports = function(users, User) {
             cb(user);
         });
     };
-    // TODO
-    api.updateUser = function(id, user) {
-        for (var idx in users) {
-            if (users[idx]._id == id) {
-                users[idx] = user;
-                return user;
-            }
-        }
-        return null;
+
+    api.updateUser = function(id, user, cb) {
+        User.update(
+            {"_id": id},
+            {"firstName": user.firstName, "lastName": user.lastName, "username": user.username, "password": user.password, "email": user.email},
+            function(err, numberAffected, rawResponse) {
+                console.log(err);
+                console.log(numberAffected);
+                console.log(rawResponse);
+                api.findUserById(id, cb);
+        });
     };
     // TODO
     api.deleteUser = function(id) {
