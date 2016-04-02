@@ -43,13 +43,19 @@ function FieldsController($scope, $routeParams, $rootScope, FormService) {
         });
 
         $scope.newField = function(){
-            var type = $scope.attrs['type'];
+            var type = $scope.attrs.type;
             if (type){
-                FormService.createField(defaults[type], $scope.form._id, function(field){
+                FormService.createField(defaults[type], formId, function(field){
                     loadFields();
                 });
             }
-        }
+        };
+
+        $scope.editField = function(id){
+            // Refresh fields (so unsaved changes are discarded)
+            loadFields();
+            $scope.edit = id;
+        };
 
         $scope.deleteField = function(id){
             if (confirm("Are You Sure You Want To Delete?")) {
@@ -58,7 +64,30 @@ function FieldsController($scope, $routeParams, $rootScope, FormService) {
                     loadFields();
                 })
             }
-        }
+        };
+
+        $scope.updateField = function(id, field){
+            FormService.updateField(id, formId, field, function(response){
+                loadFields();
+                $scope.edit = null;
+            });
+        };
+
+        $scope.addOption = function(field){
+            field.attrs[0].options.push({label: $scope.attrs.label, value: $scope.attrs.value});
+            $scope.attrs.label = "";
+            $scope.attrs.value = "";
+        };
+
+        $scope.deleteOption = function(label, field){
+            // Lookup and remove option with specified key
+            for (var idx in field.attrs[0].options){
+                if (field.attrs[0].options[idx].label == label){
+                    field.attrs[0].options.splice(idx, 1);
+                    break;
+                }
+            }
+        };
     }
 }
 

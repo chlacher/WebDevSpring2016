@@ -32,25 +32,77 @@
                         <div class="row">{{ field.label }}</div>
                         <div class="row">
                             <!--Text Box-->
-                            <input ng-if="field.type=='text' || field.type=='email'"
-                                   type="{{ field.type }}"
-                                   class="form-control"
-                                   placeholder="{{ field.attrs[0].placeholder }}">
+                            <div ng-if="field.type=='text' || field.type=='email'">
+                                <input type="{{ field.type }}"
+                                       class="form-control"
+                                       placeholder="{{ field.attrs[0].placeholder }}">
+                                <div class="edit"ng-if="edit==field._id">
+                                    <p>Editing</p>
+                                    <label>Label: <input ng-model="field.label" placeholder="Label"></label>
+                                    <label>Placeholder: <input ng-model="field.attrs[0].placeholder" placeholder="Placeholder"></label>
+                                </div>
+                            </div>
                             <!--Text Area-->
-                            <textarea ng-if="field.type=='textarea'" rows="4" cols="50" placeholder="{{ field.attrs[0].placeholder }}"/>
+                            <div ng-if="field.type=='textarea'">
+                                <textarea rows="4" cols="50" placeholder="{{ field.attrs[0].placeholder }}"/>
+                                <div class="edit"ng-if="edit==field._id">
+                                    <p>Editing</p>
+                                    <label>Label: <input ng-model="field.label" placeholder="Label"></label>
+                                    <label>Placeholder: <input ng-model="field.attrs[0].placeholder" placeholder="Placeholder"></label>
+                                </div>
+                            </div>
                             <!--Dropdown-->
-                            <select ng-if="field.type=='options'"
-                                   class="form-control">
-                                <option ng-repeat="option in field.attrs[0].options"
-                                        value="{{ option.value }}">{{ option.label }}
-                                </option>
-                            </select>
+                            <div ng-if="field.type=='options'">
+                                <select class="form-control">
+                                    <option ng-repeat="option in field.attrs[0].options"
+                                            value="{{ option.value }}">{{ option.label }}
+                                    </option>
+                                </select>
+                                <div class="edit"ng-if="edit==field._id">
+                                    <p>Editing</p>
+                                    <label>Label: <input ng-model="field.label" placeholder="Label"></label>
+                                    <div ng-repeat="option in field.attrs[0].options" class="input-group">
+                                        <input type="text" ng-model="option.label" class="form-control" placeholder="Label"/>
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" ng-model="option.value" class="form-control" placeholder="Value"/>
+                                        <span ng-click="deleteOption(option.label, field)" class="input-group-addon">X</span>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="attrs.label" class="form-control" placeholder="Label"/>
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" ng-model="attrs.value" class="form-control" placeholder="Value"/>
+                                        <span ng-click="addOption(field)" class="input-group-addon">+</span>
+                                    </div>
+                                </div>
+                            </div>
                             <!--Date Input-->
-                            <input ng-if="field.type=='date'" type="date" class="form-control">
+                            <div ng-if="field.type=='date'">
+                                <input  type="date" class="form-control">
+                                <div class="edit"ng-if="edit==field._id">
+                                    <p>Editing</p>
+                                    <label>Label: <input ng-model="field.label" placeholder="Label"></label>
+                                </div>
+                            </div>
                             <!--Checkbox-->
                             <div ng-if="field.type=='checkbox'">
                                 <div ng-repeat="option in field.attrs[0].options" class="checkbox">
                                     <label><input type="checkbox" value="{{ option.value }}">{{ option.label }}</label>
+                                </div>
+                                <div class="edit"ng-if="edit==field._id">
+                                    <p>Editing</p>
+                                    <label>Label: <input ng-model="field.label" placeholder="Label"></label>
+                                    <div ng-repeat="option in field.attrs[0].options" class="input-group">
+                                        <input type="text" ng-model="option.label" class="form-control" placeholder="Label"/>
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" ng-model="option.value" class="form-control" placeholder="Value"/>
+                                        <span ng-click="deleteOption(option.label, field)" class="input-group-addon">X</span>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="attrs.label" class="form-control" placeholder="Label"/>
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" ng-model="attrs.value" class="form-control" placeholder="Value"/>
+                                        <span ng-click="addOption(field)" class="input-group-addon">+</span>
+                                    </div>
                                 </div>
                             </div>
                             <!--Radio-->
@@ -61,11 +113,29 @@
                                         {{ option.label }}
                                     </label>
                                 </div>
+                                <div class="edit"ng-if="edit==field._id">
+                                    <p>Editing</p>
+                                    <label>Label: <input ng-model="field.label" placeholder="Label"></label>
+                                    <div ng-repeat="option in field.attrs[0].options" class="input-group">
+                                        <input type="text" ng-model="option.label" class="form-control" placeholder="Label"/>
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" ng-model="option.value" class="form-control" placeholder="Value"/>
+                                        <span ng-click="deleteOption(option.label, field)" class="input-group-addon">X</span>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="attrs.label" class="form-control" placeholder="Label"/>
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" ng-model="attrs.value" class="form-control" placeholder="Value"/>
+                                        <span ng-click="addOption(field)" class="input-group-addon">+</span>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-md-4 actions-lg">
-                        <span class="glyphicon glyphicon-pencil"/>
+                        <span ng-if="edit!=field._id" ng-click="editField(field._id)" class="glyphicon glyphicon-pencil"/>
+                        <span ng-if="edit==field._id" ng-click="updateField(field._id, field)" class="glyphicon glyphicon-ok"/>
                         <!--<span class="glyphicon glyphicon-plus"/>-->
                         <span ng-click="deleteField(field._id)" class="glyphicon glyphicon-remove"/>
                         <!--<span class="glyphicon glyphicon-align-justify"/>-->
@@ -78,7 +148,7 @@
                     <div class="col-md-4">
                         <div class="row">Add New Field:</div>
                         <div class="row">
-                            <select ng-model="attrs[0].type" class="form-control">
+                            <select ng-model="attrs.type" class="form-control">
                                 <option value="text">Single Line Text</option>
                                 <option value="date">Date</option>
                                 <option value="dropdown">Dropdown</option>

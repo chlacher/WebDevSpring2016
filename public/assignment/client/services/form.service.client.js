@@ -44,5 +44,9 @@ function FormService(APIService){
             APIService.DELETE("form/" + formId + "/field/" + id, callback);
         };
 
+        fac.updateField = function(id, formId, field, callback){
+            APIService.PUT("form/" + formId + "/field/" + id, field, callback)
+        }
+
         return fac;
 }

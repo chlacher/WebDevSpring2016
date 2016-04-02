@@ -155,3 +155,15 @@ div.actions-lg {
     padding-left: 3em;
     margin-bottom: 3em;
 }
+
+.edit {
+    border-style: double;
+    border-color: orange;
+    padding: 1em;
+    margin: 1em;
+}
+
+.edit > p{
+    text-align: center;
+    font-weight: bold;
+}
