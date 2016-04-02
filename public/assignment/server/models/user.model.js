@@ -47,7 +47,7 @@ module.exports = function(User) {
     api.updateUser = function(id, user, cb) {
         User.update(
             {"_id": id},
-            {"firstName": user.firstName, "lastName": user.lastName, "username": user.username, "password": user.password, "email": user.email},
+            {"firstName": user.firstName, "lastName": user.lastName, "username": user.username, "password": user.password, "email": user.email, "roles": user.roles},
             function(err, numberAffected, rawResponse) {
                 console.log(err);
                 console.log(numberAffected);
@@ -58,8 +58,9 @@ module.exports = function(User) {
 
     api.deleteUser = function(id, cb) {
         User.findByIdAndRemove(id, function (err) {
-            if (err)
-                cb({error: err});
+            if (err) {
+                cb({error: err.message});
+            }
             cb({message: 'Successfully removed'});
         });
     };

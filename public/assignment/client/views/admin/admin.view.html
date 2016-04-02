@@ -14,29 +14,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><input id="userInput" placeholder="username"></td>
-                        <td><input id="userPassword" type="password" placeholder="password"></td>
-                        <td><input id="userRole" placeholder="role1, role2"></td>
-                        <td><span class="glyphicon glyphicon-plus"/> <span class="glyphicon glyphicon-ok"/></td>
+                    <tr ng-if="!editFlag">
+                        <td><input ng-model="newUser.username" placeholder="username"></td>
+                        <td><input ng-model="newUser.password" type="password" placeholder="password"></td>
+                        <td><input ng-model="newUser.roles" placeholder="role1, role2"></td>
+                        <td><span ng-click="add()" class="glyphicon glyphicon-plus"/></td>
                     </tr>
-                    <tr>
-                        <td>alice</td>
-                        <td></td>
-                        <td>student</td>
-                        <td><span class="glyphicon glyphicon-remove"/> <span class="glyphicon glyphicon-pencil"/></td>
+                    <tr ng-if="editFlag">
+                            <td></td><td></td><td></td>
+                            <td><span ng-click="edit(0)" class="glyphicon glyphicon-pencil"/></td>
                     </tr>
-                    <tr>
-                        <td>bob</td>
-                        <td></td>
-                        <td>faculty, admin</td>
-                        <td><span class="glyphicon glyphicon-remove"/> <span class="glyphicon glyphicon-pencil"/></td>
-                    </tr>
-                    <tr>
-                        <td>charlie</td>
-                        <td></td>
-                        <td></td>
-                        <td><span class="glyphicon glyphicon-remove"/> <span class="glyphicon glyphicon-pencil"/></td>
+                    <tr ng-repeat="user in users">
+                        <td>
+                            <p ng-if="editFlag!=user._id">{{user.username}}</p>
+                            <input ng-if="editFlag==user._id" ng-model="user.username" placeholder="username">
+                        </td>
+                        <td>
+                            <input ng-if="editFlag==user._id" ng-model="user.password" placeholder="password">
+                        </td>
+                        <td>
+                            <p ng-if="editFlag!=user._id">{{user.roles.join(', ')}}</p>
+                            <input ng-if="editFlag==user._id" ng-model="user.roles" placeholder="role1, role2">
+                        </td>
+                        <td>
+                            <span ng-click="delete(user._id)" class="glyphicon glyphicon-remove"/>
+                            <span ng-if="editFlag!=user._id" ng-click="edit(user._id)" class="glyphicon glyphicon-pencil"/>
+                            <span ng-if="editFlag==user._id" ng-click="save(user)" class="glyphicon glyphicon-ok"/>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
