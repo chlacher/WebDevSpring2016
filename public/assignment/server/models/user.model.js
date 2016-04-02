@@ -1,4 +1,4 @@
-module.exports = function(users, User) {
+module.exports = function(User) {
 
     var api = {};
 
@@ -55,15 +55,13 @@ module.exports = function(users, User) {
                 api.findUserById(id, cb);
         });
     };
-    // TODO
-    api.deleteUser = function(id) {
-        for (var idx in users) {
-            if (users[idx]._id == id) {
-                users.splice(idx, 1);
-                return true;
-            }
-        }
-        return false;
+
+    api.deleteUser = function(id, cb) {
+        User.findByIdAndRemove(id, function (err) {
+            if (err)
+                cb({error: err});
+            cb({message: 'Successfully removed'});
+        });
     };
 
     return api;

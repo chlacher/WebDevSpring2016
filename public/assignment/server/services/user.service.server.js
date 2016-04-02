@@ -50,10 +50,11 @@ module.exports = function (app, model) {
             res.json(user);
         });
     }
-    // TODO
+
     function deleteUserById (req, res) {
         var id = req.params.id;
-        model.deleteUser(id);
-        res.json (model.findAllUsers());
+        model.deleteUser(id, function(response) {
+            res.json(response);
+        });
     }
 };
