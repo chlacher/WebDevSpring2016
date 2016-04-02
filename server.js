@@ -10,7 +10,15 @@ app.use(bodyParser.json());
 
 // Connect to DB
 var db = require('mongoose');
-var assignment_db = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/';
+var connectionString =  'mongodb://localhost/';
+
+// If we are on OPENSHIFT
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/';
+}
 
 db.connect(assignment_db  + 'assignment');
 
