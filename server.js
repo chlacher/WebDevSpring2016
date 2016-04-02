@@ -20,7 +20,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
         process.env.OPENSHIFT_MONGODB_DB_PORT + '/';
 }
 
-db.connect(assignment_db  + 'assignment');
+db.connect(connectionString  + 'assignment');
 
 // Client
 app.use(express.static(__dirname + '/public/'));
