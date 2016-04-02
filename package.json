@@ -1,0 +1,25 @@
+{
+  "name": "webdev2016",
+  "version": "1.0.0",
+  "description": "Assignments for Web Dev 2016",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://569e774789f5cff9f2000143@webdev2016-lacherclarke.rhcloud.com/~/git/webdev2016.git/"
+  },
+  "keywords": [
+    "assignment"
+  ],
+  "author": "Clarke Lacher",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.10",
+    "multer": "^1.1.0"
+  }
+}
