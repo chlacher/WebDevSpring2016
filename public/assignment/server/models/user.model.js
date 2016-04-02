@@ -60,8 +60,9 @@ module.exports = function(User) {
         User.findByIdAndRemove(id, function (err) {
             if (err) {
                 cb({error: err.message});
+            } else {
+                cb({message: 'Successfully removed'});
             }
-            cb({message: 'Successfully removed'});
         });
     };
 

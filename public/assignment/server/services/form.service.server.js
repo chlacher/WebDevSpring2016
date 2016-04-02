@@ -8,35 +8,41 @@ module.exports = function (app, model) {
 
     function getFormsForUser (req, res) {
         var userId = req.params.userId;
-        var forms = model.findFormsForUser(userId);
-        res.json(forms);
+        model.findFormsForUser(userId, function(forms){
+            res.json(forms);
+        });
     }
 
     function getFormById (req, res) {
         var id = req.params.formId;
-        var form = model.findUserById(id);
-        res.json(form);
+        model.findFormById(id, function(form){
+            res.json(form);
+        });
     }
 
     function createForm (req, res) {
         var userId = req.params.userId;
-        var now = new Date();
+        //var now = new Date();
         var form = req.body;
-        form._id = now.getTime();
+        //form._id = now.getTime();
         form.userId = userId;
-        model.createForm(form);
-        res.json(forms);
+        model.createForm(form, function(form){
+            res.json(form);
+        });
     }
 
     function updateFormById (req, res) {
         var formId = req.params.formId;
         var form = req.body;
-        res.json(model.updateForm(formId, form));
+        model.updateForm(formId, form, function(form){
+            res.json(form);
+        });
     }
 
     function deleteFormById (req, res) {
         var formId = req.params.formId;
-        model.deleteForm(formId);
-        res.json (model.findAllUsers());
+        model.deleteForm(formId, function(response){
+            res.json(response);
+        });
     }
 };

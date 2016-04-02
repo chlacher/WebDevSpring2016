@@ -1,6 +1,6 @@
 angular
     .module('FormBuilderApp')
-    .factory('UserService', ['APIService', UserService])
+    .factory('UserService', ['APIService', UserService]);
 
 function UserService(APIService){
 

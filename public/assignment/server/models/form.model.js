@@ -1,111 +1,139 @@
-module.exports = function(forms) {
+module.exports = function(Form, Field) {
     var api = {};
 
-    api.findAllForms = function () {
-        return forms;
+    api.findAllForms = function (cb) {
+        Form.find({}, function(err, forms){
+            cb(forms);
+        });
     };
 
-    api.findFormById = function (id) {
-        for (var idx in forms) {
-            if (forms[idx]._id == id)
-                return forms[idx];
-        }
-        return null;
-    };
-
-    api.findFormByTitle = function (title) {
-        for (var idx in forms) {
-            if (forms[idx].title === title)
-                return forms[idx];
-        }
-        return null;
-    };
-
-    api.findFormsForUser = function (userId) {
-        var userForms = [];
-        for (var idx in forms) {
-            if (forms[idx].userId === userId)
-                userForms.push(forms[idx]);
-        }
-        return userForms;
-    };
-
-    api.findFieldById = function(fieldId, formId) {
-        var form = api.findFormById(formId);
-        if (form == null)
-            return null;
-        for (var idx in form.fields){
-            if (form.fields[idx]._id == fieldId)
-                return form.fields[idx];
-        }
-
-        return null;
-    };
-
-    api.findFieldsForForm = function(id) {
-        for (var idx in forms) {
-            if (forms[idx]._id == id)
-                return forms[idx].fields;
-        }
-
-        return null;
-    };
-
-    api.createForm = function (form) {
-        var now = new Date();
-        form._id = now.getTime();
-        forms.push(form);
-        return forms;
-    };
-
-    api.createField = function(field, formId){
-        var now = new Date();
-        field._id = now.getTime();
-        var form = api.findFormById(formId);
-        form.fields.push(field);
-        api.updateForm(formId, form);
-    };
-
-    api.updateForm = function (id, form) {
-        for (var idx in forms) {
-            if (forms[idx]._id == id) {
-                forms[idx] = form;
-                return true;
+    api.findFormById = function (id, cb) {
+        Form.find({_id: id}, function(err, forms){
+            if (err || !forms){
+                cb(null);
+            } else {
+                cb(forms[0]);
             }
-        }
-        return false;
+        });
     };
 
-    api.updateField = function (id, field, formId){
-        var form = api.findFormById(formId);
-        for (var idx in form.fields){
-            if (form.fields[idx]._id == id){
-                form.fields[idx] = field;
-                return updateForm(formId, form);
+    api.findFormByTitle = function (title, cb) {
+        Form.find({title: title}, function(err, forms){
+            if (err || !forms){
+                cb(null);
+            } else {
+                cb(forms[0]);
             }
-        }
-        return false;
+        });
     };
 
-    api.deleteForm = function (id) {
-        for (var idx in forms) {
-            if (forms[idx]._id == id) {
-                forms.splice(idx, 1);
-                return true;
+    api.findFormsForUser = function (userId, cb) {
+        Form.find({userId: userId}, function(err, forms){
+            if (err || !forms){
+                cb(null);
+            } else {
+                cb(forms);
             }
-        }
-        return false;
+        });
     };
 
-    api.deleteField = function (fieldId, formId) {
-        var form = api.findFormById(formId);
-        for (var idx in form.fields){
-            if (form.fields[idx]._id == fieldId){
-                form.fields.splice(idx, 1);
-                return api.updateForm(formId, form);
+    api.findFieldById = function(fieldId, cb) {
+        Field.find({_id: fieldId}, function(err, fields){
+            if (err || !fields){
+                cb(null);
+            } else {
+                cb(fields[0]);
             }
-        }
-        return false;
+        });
+    };
+
+    api.findFieldsForForm = function(id, cb) {
+        api.findFormById(id, function(form){
+            Field.find({_id: {$in: form.fieldIds} }, function(err, fields){
+                if (err || !fields){
+                    cb(null);
+                } else {
+                    cb(fields);
+                }
+            })
+        });
+    };
+
+    api.createForm = function (form, cb) {
+        Form.create(form, function(error, doc){
+            cb(form);
+        });
+    };
+
+    api.createField = function(field, formId, cb) {
+        // Make sure form exists
+        api.findFormById(formId, function (form) {
+            if (!form) {
+                cb(null);
+            } else {
+                // Create field
+                Field.create(field, function(error, field){
+                    // Add field to form fieldIds
+                    form.fieldIds.push(field._id);
+                    form.save(function(){
+                        cb(field);
+                    })
+                });
+            }
+        });
+    };
+
+    api.updateForm = function (id, form, cb) {
+        Form.update(
+            {"_id": id},
+            {title: form.title, userId: form.userId, fields: form.fields},
+            function(err, numberAffected, rawResponse) {
+                console.log(err);
+                console.log(numberAffected);
+                console.log(rawResponse);
+                api.findFormById(id, cb);
+            });
+    };
+
+    api.updateField = function (id, field, cb){
+        Field.update(
+            {"_id": id},
+            {label: field.label, type: field.type, attrs: field.attrs},
+            function(err, numberAffected, rawResponse) {
+                console.log(err);
+                console.log(numberAffected);
+                console.log(rawResponse);
+                api.findFieldById(id, cb);
+            });
+    };
+
+    api.deleteForm = function (id, cb){
+        Form.findByIdAndRemove(id, function (err) {
+            if (err) {
+                cb({error: err.message});
+            } else {
+                cb({message: 'Successfully removed'});
+            }
+        });
+    };
+
+    api.deleteField = function (fieldId, formId, cb) {
+        Field.findByIdAndRemove(id, function (err) {
+            if (err) {
+                cb({error: err.message});
+            } else {
+                api.findFormById(formId, function(form){
+                    for (var idx in form.fieldIds){
+                        if (form.fieldIds[idx]._id == fieldId){
+                            form.fieldIds.splice(idx, 1);
+                            return api.updateForm(formId, form, function(){
+                                cb({message: 'Successfully removed'});
+                            });
+                        }
+                    }
+                });
+            }
+        });
     };
 
     return api;
