@@ -38,7 +38,11 @@ function FormService(APIService){
 
         fac.findFieldsForForm = function(formId, callback){
             APIService.GET("form/" + formId + "/field", callback);
-        }
+        };
+
+        fac.deleteField = function(id, formId, callback){
+            APIService.DELETE("form/" + formId + "/field/" + id, callback);
+        };
 
         return fac;
 }

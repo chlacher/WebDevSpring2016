@@ -118,16 +118,16 @@ module.exports = function(Form, Field) {
     };
 
     api.deleteField = function (fieldId, formId, cb) {
-        Field.findByIdAndRemove(id, function (err) {
+        Field.findByIdAndRemove(fieldId, function (err) {
             if (err) {
                 cb({error: err.message});
             } else {
                 api.findFormById(formId, function(form){
                     for (var idx in form.fieldIds){
-                        if (form.fieldIds[idx]._id == fieldId){
+                        if (form.fieldIds[idx] == fieldId){
                             form.fieldIds.splice(idx, 1);
-                            return api.updateForm(formId, form, function(){
-                                cb({message: 'Successfully removed'});
+                            return form.save(function(){
+                                return cb({message: 'Successfully removed'});
                             });
                         }
                     }

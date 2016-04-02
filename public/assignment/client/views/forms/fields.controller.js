@@ -50,6 +50,15 @@ function FieldsController($scope, $routeParams, $rootScope, FormService) {
                 });
             }
         }
+
+        $scope.deleteField = function(id){
+            if (confirm("Are You Sure You Want To Delete?")) {
+                FormService.deleteField(id, formId, function (response) {
+                    alert(response.message);
+                    loadFields();
+                })
+            }
+        }
     }
 }
 
