@@ -10,7 +10,8 @@ app.use(bodyParser.json());
 
 // Connect to DB
 var db = require('mongoose');
-var assignment_db = 'mongodb://localhost/assignment';
+var assignment_db = proccess.env.OPENSHIFT_MONGODB_DB_URL + '/assignment' || 'mongodb://localhost/assignment';
+
 db.connect(assignment_db);
 
 // Client
