@@ -10,17 +10,18 @@ app.use(bodyParser.json());
 
 // Connect to DB
 var db = require('mongoose');
-var connectionString =  'mongodb://localhost/';
+var connectionString =  'mongodb://localhost';
 
 // If we are on OPENSHIFT
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
     connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
         process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
         process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-        process.env.OPENSHIFT_MONGODB_DB_PORT + '/';
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
 }
 
-db.connect(connectionString  + 'assignment');
+db.connect(connectionString  + '/assignment');
 
 // Client
 app.use(express.static(__dirname + '/public/'));
