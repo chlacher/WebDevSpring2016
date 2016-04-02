@@ -10,9 +10,9 @@ app.use(bodyParser.json());
 
 // Connect to DB
 var db = require('mongoose');
-var assignment_db = proccess.env.OPENSHIFT_MONGODB_DB_URL + '/assignment' || 'mongodb://localhost/assignment';
+var assignment_db = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/';
 
-db.connect(assignment_db);
+db.connect(assignment_db  + 'assignment');
 
 // Client
 app.use(express.static(__dirname + '/public/'));
