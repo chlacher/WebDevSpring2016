@@ -6,47 +6,41 @@ function FormService(APIService){
 
     var fac = {};
 
-        //fac.forms = [
-        //    {"_id": "000", "title": "Contacts", "userId": 123},
-        //    {"_id": "010", "title": "ToDo",     "userId": 123},
-        //    {"_id": "020", "title": "CDs",      "userId": 234},
-        //];
-
-        fac.findFormById = function(formId, callback){
-            APIService.GET("form/" + formId, callback);
+        fac.findFormById = function(formId){
+            return APIService.GET("form/" + formId);
         };
 
-        fac.createFormForUser = function(userId, form, callback){
-            APIService.POST("user/" + userId +  "/form", form, callback);
+        fac.createFormForUser = function(userId, form){
+            return APIService.POST("user/" + userId +  "/form", form);
         };
 
-        fac.findAllFormsForUser = function(userId, callback){
-            APIService.GET("user/" + userId + "/form", callback);
+        fac.findAllFormsForUser = function(userId){
+            return APIService.GET("user/" + userId + "/form");
         };
 
-        fac.deleteFormById = function(formId, callback){
-            APIService.DELETE("form/" + formId, callback);
+        fac.deleteFormById = function(formId){
+            return APIService.DELETE("form/" + formId);
         };
 
-        fac.updateFormById = function(formId, newForm, callback){
-            APIService.PUT("form/" + formId, newForm, callback);
+        fac.updateFormById = function(formId, newForm){
+            return APIService.PUT("form/" + formId, newForm);
         };
 
-        fac.createField = function(field, formId, callback){
-            APIService.POST("form/" + formId + "/field", field, callback);
+        fac.createField = function(field, formId){
+            return APIService.POST("form/" + formId + "/field", field);
         };
 
-        fac.findFieldsForForm = function(formId, callback){
-            APIService.GET("form/" + formId + "/field", callback);
+        fac.findFieldsForForm = function(formId){
+            return APIService.GET("form/" + formId + "/field");
         };
 
-        fac.deleteField = function(id, formId, callback){
-            APIService.DELETE("form/" + formId + "/field/" + id, callback);
+        fac.deleteField = function(id, formId){
+            return APIService.DELETE("form/" + formId + "/field/" + id);
         };
 
-        fac.updateField = function(id, formId, field, callback){
-            APIService.PUT("form/" + formId + "/field/" + id, field, callback)
-        }
+        fac.updateField = function(id, formId, field){
+            return APIService.PUT("form/" + formId + "/field/" + id, field);
+        };
 
         return fac;
 }

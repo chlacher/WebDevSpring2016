@@ -20,16 +20,20 @@ function FieldsController($scope, $routeParams, $rootScope, FormService) {
     };
 
     var loadForm = function(){
-        FormService.findFormById(formId, function(form){
-            $scope.form = form;
+        FormService.findFormById(formId).then(function(response){
+            if (response.data) {
+                $scope.form = response.data;
+            }
         });
     };
 
     var loadFields = function() {
-        FormService.findFieldsForForm(formId, function(fields){
-            $scope.fields = fields;
-        })
-    }
+        FormService.findFieldsForForm(formId).then(function(response){
+            if (response.data) {
+                $scope.fields = response.data;
+            }
+        });
+    };
 
     if (formId){
         loadForm();
@@ -38,14 +42,16 @@ function FieldsController($scope, $routeParams, $rootScope, FormService) {
 
     if ($rootScope.user){
 
-        FormService.findAllFormsForUser($rootScope.user._id, function(forms){
-            $scope.forms = forms;
+        FormService.findAllFormsForUser($rootScope.user._id).then(function(response){
+            if (response.data) {
+                $scope.forms = response.data;
+            }
         });
 
         $scope.newField = function(){
             var type = $scope.attrs.type;
             if (type){
-                FormService.createField(defaults[type], formId, function(field){
+                FormService.createField(defaults[type], formId).then(function(){
                     loadFields();
                 });
             }
@@ -59,15 +65,17 @@ function FieldsController($scope, $routeParams, $rootScope, FormService) {
 
         $scope.deleteField = function(id){
             if (confirm("Are You Sure You Want To Delete?")) {
-                FormService.deleteField(id, formId, function (response) {
-                    alert(response.message);
-                    loadFields();
+                FormService.deleteField(id, formId).then(function(response){
+                    if (response.data) {
+                        alert(response.data.message);
+                        loadFields();
+                    }
                 })
             }
         };
 
         $scope.updateField = function(id, field){
-            FormService.updateField(id, formId, field, function(response){
+            FormService.updateField(id, formId, field).then(function(){
                 loadFields();
                 $scope.edit = null;
             });

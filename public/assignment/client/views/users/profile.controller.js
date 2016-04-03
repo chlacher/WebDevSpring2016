@@ -2,20 +2,14 @@
 
 angular
     .module('FormBuilderApp')
-    .controller('ProfileController', ['$scope', '$location', '$rootScope', 'UserService', ProfileController]);
+    .controller('ProfileController', ['$scope', '$rootScope', 'UserService', ProfileController]);
 
 
-function ProfileController($scope, $location, $rootScope, UserService) {
+function ProfileController($scope, $rootScope, UserService) {
 
     $scope.update = function(){
         var user = $rootScope.user;
-        if ($scope.username){
-            if (UserService.findUserByUsername($scope.username)){
-                // TODO: Throw Exception: Username already in use
-                return null;
-            }
-            user.username = $scope.username;
-        }
+
         if ($scope.password){
             user.password = $scope.password;
         }
@@ -28,13 +22,26 @@ function ProfileController($scope, $location, $rootScope, UserService) {
         if ($scope.email){
             user.email = $scope.email;
         }
-        UserService.updateUser(user._id, user, attemptUpdate);
-    }
+        // Verify name not in use
+        if ($scope.username) {
+            UserService.findUserByUsername($scope.username).then(function (response) {
+                if (response.data) {
+                    alert("Error: Username Already In Use")
+                    return null;
+                }
+                user.username = $scope.username;
+                updateUser(user);
+            });
+        } else {
+            updateUser(user);
+        }};
 
-    var attemptUpdate = function(user){
-        if (user){
-            $rootScope.user = user;
-            // TODO: Confirmation message
+        var updateUser = function(user) {
+            UserService.updateUser(user._id, user).then(function (response) {
+                if (response.data) {
+                    $rootScope.user = response.data;
+                }
+            });
         }
-    }
+
 }

@@ -7,16 +7,12 @@ angular
 
 function LoginController($scope, $location, $rootScope, UserService) {
 
-    $scope.login = function(){
-        UserService.findUserByCredentials($scope.username, $scope.password, attemptLogin);
-    }
-
-    var attemptLogin = function(user){
-        if (user){
-            $rootScope.user = user;
-            $location.path('/profile');
-        } else {
-            // TODO: Show invalid username/password message
-        }
-    }
+    $scope.login = function () {
+        UserService.findUserByCredentials($scope.username, $scope.password).then(function (response) {
+            if (response.data) {
+                $rootScope.user = response.data;
+                $location.path('/profile');
+            }
+        });
+    };
 }

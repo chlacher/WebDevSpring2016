@@ -10,18 +10,18 @@ function AdminController($scope, UserService) {
     $scope.newUser = {};
 
     var refreshUsers = function(){
-        UserService.findAllUsers(function(users){
-            $scope.users = users;
+        UserService.findAllUsers().then(function(response) {
+            $scope.users = response.data;
         });
     };
 
     $scope.delete = function(id){
         if (confirm("Are you sure you want to delete?")){
-            UserService.deleteUserById(id, function(res){
-                 if (res.error){
-                    alert("Errror: " + res.error);
+            UserService.deleteUserById(id).then(function(response){
+                 if (response.data.error){
+                    alert("Error: " + response.data.error);
                 } else {
-                    alert(res.message);
+                    alert(response.data.message);
                     refreshUsers();
                 }
             });
@@ -37,8 +37,8 @@ function AdminController($scope, UserService) {
         if (user.roles.split) {
             user.roles = user.roles.replace(/ /g, '').split(',');
         }
-        UserService.updateUser(user._id, user, function(user){
-            if (user){
+        UserService.updateUser(user._id, user).then(function(response){
+            if (response.data){
                 $scope.editFlag = '';
             }
         });
@@ -49,8 +49,8 @@ function AdminController($scope, UserService) {
         if($scope.newUser.roles){
             $scope.newUser.roles = $scope.newUser.roles.replace(/ /g, '').split(',');
         }
-        UserService.createUser($scope.newUser, function(res) {
-            if (res) {
+        UserService.createUser($scope.newUser).then(function(response){
+            if (response.data){
                 $scope.newUser = {};
                 refreshUsers();
             }
