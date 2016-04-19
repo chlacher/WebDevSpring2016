@@ -43,6 +43,9 @@ body {
     margin-top: 0;
 }
 
+h1.siteHeader {
+    color: #d3c7a9;
+}
 
 /*
  * Missing Style elements
@@ -186,5 +189,5 @@ body {
 }
 
 .gap-below {
-    margin-bottom: 200px;
+    margin-bottom: 150px;
 }

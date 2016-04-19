@@ -1,9 +1,9 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <h1>LoLComps <small class="hidden-xs">Draft Winning Teams</small></h1>
+    <div class="row">
+        <div class="col-xs-5 col-xs-offset-1 col-sm-6">
+            <h1 class="siteHeader">LoLComps <br class="visible-xs"> <small>Draft Winning Teams</small></h1>
         </div>
-        <div>
+        <div class="col-xs-5 col-xs-offset-1 col-sm-4">
             <div class="btn-group pull-right padded" role="group" aria-label="...">
                 <div class="btn-group" role="group">
                     <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="user.region"></select>
