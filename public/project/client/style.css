@@ -130,6 +130,8 @@ h1.siteHeader {
     background-color:gray;
     border: solid;
     z-index: 10000;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .regModal {
@@ -141,6 +143,8 @@ h1.siteHeader {
     background-color:gray;
     border: solid;
     z-index: 10000;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .modal-content{
@@ -176,6 +180,11 @@ h1.siteHeader {
     width: 13em;
     height: 11em;
     z-index: -1;
+}
+
+a.visible {
+    color: rgb(255, 235, 205);
+    font-weight: 300;
 }
 
 .right-text > h1 {

@@ -3,13 +3,53 @@
 
     <h1>Register</h1>
         <form class="form-horizontal">
+            <div class="input-group">
+                <input ng-model="data.username" class="form-control" placeholder="Username">
+                <span class="input-group-addon">Username</span>
+            </div>
+
+            <div class="input-group">
+                <input ng-model="data.password" type="password" class="form-control" placeholder="Password">
+                <span class="input-group-addon">Password</span>
+            </div>
+
+            <div class="input-group">
+                <input ng-model="data.confirm" type="password" class="form-control" placeholder="Confirm Password">
+                <span class="input-group-addon">Confirm Password</span>
+            </div>
+
+            <div class="input-group">
+                <input ng-model="data.summoner" class="form-control" placeholder="Summoner Name">
+                <span class="input-group-addon">Summoner Name</span>
+            </div>
+            <div class="input-group">
+                <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="data.region"></select>
+                <span class="input-group-addon">Region</span>
+            </div><div class="input-group">
             <input ng-model="data.username" class="form-control" placeholder="Username">
-            <input ng-model="data.password" type="password" class="form-control" placeholder="Password">
-            <input ng-model="data.confirm" type="password" class="form-control" placeholder="Confirm Password">
-            <input ng-model="data.summoner" class="form-control" placeholder="Summoner Name">
-            <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="data.region"></select>
+            <span class="input-group-addon">Username</span>
+        </div>
+
+            <div class="input-group">
+                <input ng-model="data.password" type="password" class="form-control" placeholder="Password">
+                <span class="input-group-addon">Password</span>
+            </div>
+
+            <div class="input-group">
+                <input ng-model="data.confirm" type="password" class="form-control" placeholder="Confirm Password">
+                <span class="input-group-addon">Confirm Password</span>
+            </div>
+
+            <div class="input-group">
+                <input ng-model="data.summoner" class="form-control" placeholder="Summoner Name">
+                <span class="input-group-addon">Summoner Name</span>
+            </div>
+            <div class="input-group">
+                <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="data.region"></select>
+                <span class="input-group-addon">Region</span>
+            </div>
             <button ng-click="register()" class="btn form-control btn-default">Register</button>
             <div class="red">{{error}}</div>
-            <a ng-click="login()">Have an Account? Log In</a>
+            <a class="visible" ng-click="login()">Have an Account? Log In</a>
         </form>
 </div>

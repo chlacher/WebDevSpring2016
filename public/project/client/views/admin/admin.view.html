@@ -41,11 +41,27 @@
         <div ng-if="section == 'user'" class="form-horizontal">
             <h3>Editing {{ user.username }}</h3>
             <form ng-if="user" class="form-horizontal">
-                <input ng-model="user.username" class="form-control" placeholder="Username">
-                <input ng-model="user.password" type="password" class="form-control" placeholder="Password">
-                <input ng-model="user.summoner" class="form-control" placeholder="Summoner Name">
-                <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="user.region"></select>
-                <input ng-model="user.role" class="form-control" placeholder="Role">
+                <div class="input-group">
+                    <input ng-model="user.username" class="form-control" placeholder="Username">
+                    <span class="input-group-addon">Username</span>
+                </div>
+
+                <div class="input-group">
+                    <input ng-model="user.password" type="password" class="form-control" placeholder="Password">
+                    <span class="input-group-addon">Password</span>
+                </div>
+                <div class="input-group">
+                    <input ng-model="user.summoner" class="form-control" placeholder="Summoner Name">
+                    <span class="input-group-addon">Summoner Name</span>
+                </div>
+                <div class="input-group">
+                    <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="user.region"></select>
+                    <span class="input-group-addon">Region</span>
+                </div>
+                <div class="input-group">
+                    <input ng-model="user.role" class="form-control" placeholder="Role">
+                    <span class="input-group-addon">Role</span>
+                </div>
                 <button ng-click="updateChamp()" class="btn form-control btn-default">Update</button>
                 <div class="red">{{error}}</div>
             </form>

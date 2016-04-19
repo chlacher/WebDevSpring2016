@@ -46,7 +46,7 @@ module.exports = function(User) {
     function updateUser(id, user, cb) {
         User.update(
             {_id: id},
-            {username: user.username, password: user.password, summoner: user.summoner, region: user.region},
+            {username: user.username, password: user.password, summoner: user.summoner, region: user.region, role: user.role},
             function(err, numberAffected, rawResponse) {
                 console.log(err);
                 console.log(numberAffected);

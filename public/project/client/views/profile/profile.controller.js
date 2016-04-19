@@ -46,6 +46,7 @@ function ProfileController($scope, ModalService, UserService) {
     // Listen for update in user status
     var userStatus = function(){
         $scope.data = UserService.user;
+        console.log($scope.data);
     };
     UserService.listen(userStatus);
 
