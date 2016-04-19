@@ -47,6 +47,40 @@ h1.siteHeader {
     color: #d3c7a9;
 }
 
+.background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -99999999;
+}
+
+div.welcome {
+    background-image: url('https://i.ytimg.com/vi/BGtROJeMPeE/maxresdefault.jpg');
+}
+
+.getStarted{
+    font-size: 3em;
+    border-style: inset;
+    border-color: black;
+    font-family: fantasy;
+    position: fixed;
+    right: 1%;
+    width: 45%;
+    bottom: 1%;
+    padding: 0.5em;
+}
+
+.greenText {
+    background-color: cadetblue;
+    border-color: black;
+    border-style: dotted;
+    padding: 2em;
+    font-size: large;
+    color: darkslategrey;
+}
+
 /*
  * Missing Style elements
  */
