@@ -15,6 +15,7 @@ function HeaderController($scope, $rootScope, UserService, ModalService) {
 
     $scope.logout = function(){
         UserService.logout();
+        ModalService.closeAll();
     };
 
     $scope.profile = function(){

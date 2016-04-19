@@ -169,6 +169,11 @@ h1.siteHeader {
 .in-dd-container > .in {
     width: 63.337%;
 }
+
+.in-dd-container > .in > p {
+    padding: 0.4em;
+}
+
 .in-dd-container > .dd {
     width: 36.333%;
 }
@@ -198,5 +203,5 @@ a.visible {
 }
 
 .gap-below {
-    margin-bottom: 150px;
+    margin-bottom: 80px;
 }

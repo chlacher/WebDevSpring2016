@@ -19,6 +19,11 @@ angular
             fac.update();
         };
 
+        fac.closeAll = function(){
+            fac.modals = {};
+            fac.update();
+        };
+
         // Listeners: callback functions that will be hit on update
         var listeners = [];
 
