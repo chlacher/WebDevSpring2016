@@ -40,7 +40,6 @@
                                     <button class="btn btn-secondary" type="button" ng-click="clearSummoner(n)">X</button>
                                 </span>
                         </div>
-
                         <select ng-model="summoners[n].role" ng-change="updateRole(n, summoners[n].role)" class="form-control">
                             <option value="top">Top</option>
                             <option value="middle">Mid</option>
@@ -56,20 +55,53 @@
         </div>
         <div class="red col-md-5">
             <h1>Red Team <small id="bl-percent">50%</small></h1>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar"
+                     aria-valuenow="{{ redDamage.phy }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ redDamage.phy }}%">
+                    Physical Damage
+                </div>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                     aria-valuenow="{{ redDamage.mag }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ redDamage.mag }}%">
+                    Magic Damage
+                </div>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar"
+                     aria-valuenow="{{ redDamage.def }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ redDamage.def }}%">
+                    Tankiness
+                </div>
+            </div>
+
             <div class="champDisp" ng-repeat="n in [5,6,7,8,9]">
                 <div class="row">
                     <img class="champIcon" ng-click="selectChamp(n)" src="{{ summoners[n].icon }}">
                     <div class="col-md-6">
-                        <input class="form-control" placeholder="Summoner Name">
-                        <select class="form-control">
-                            <option value="0">Role Unknown</option>
+                        <div ng-if="!summoners[n].name" class="input-group">
+                            <input type="text" class="form-control" ng-model="names[n]" placeholder="Summoner Name">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button" ng-click="searchSummoner(n)">Search</button>
+                                </span>
+                        </div>
+                        <div ng-if="summoners[n].name" class="input-group">
+                            <p class="form-control">{{ summoners[n].name }}</p>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button" ng-click="clearSummoner(n)">X</button>
+                                </span>
+                        </div>
+                        <select ng-model="summoners[n].role" ng-change="updateRole(n, summoners[n].role)" class="form-control">
                             <option value="top">Top</option>
-                            <option value="mid">Mid</option>
-                            <option value="bot">Bot</option>
-                            <option value="sup">Support</option>
-                            <option value="jg">Jungle</option>
+                            <option value="middle">Mid</option>
+                            <option value="ADC">Bot</option>
+                            <option value="support">Support</option>
+                            <option value="jungle">Jungle</option>
                         </select>
-                        <p class="form-control">Win %: </p>
+                        <p ng-if="summoners[n].winRate" class="form-control">Win Rate: {{ summoners[n].winRate.toFixed(2) }} %</p>
+                        <p ng-if="!summoners[n].winRate" class="form-control">Win Rate: ???????</p>
                     </div>
                 </div>
             </div>

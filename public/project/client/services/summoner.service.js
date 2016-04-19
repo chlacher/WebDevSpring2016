@@ -90,7 +90,6 @@ function SummonerService(APIService, $rootScope){
 
         // Champion GG Data by ChampId for specific role
         var getChampGGData = function(champId, type, role, useDef){
-            console.log(role);
             for (var idx in fac.champs){
                 var champ = fac.champs[idx];
                 if (champ.id == champId){
