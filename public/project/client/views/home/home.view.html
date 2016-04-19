@@ -41,11 +41,7 @@
                                 </span>
                         </div>
                         <select ng-model="summoners[n].role" ng-change="updateRole(n, summoners[n].role)" class="form-control">
-                            <option value="top">Top</option>
-                            <option value="middle">Mid</option>
-                            <option value="ADC">Bot</option>
-                            <option value="support">Support</option>
-                            <option value="jungle">Jungle</option>
+                            <option ng-repeat="(key, value) in roles" value="{{key}}">{{value}}</option>
                         </select>
                         <p ng-if="summoners[n].winRate" class="form-control">Win Rate: {{ summoners[n].winRate.toFixed(2) }} %</p>
                         <p ng-if="!summoners[n].winRate" class="form-control">Win Rate: ???????</p>
@@ -94,11 +90,7 @@
                                 </span>
                         </div>
                         <select ng-model="summoners[n].role" ng-change="updateRole(n, summoners[n].role)" class="form-control">
-                            <option value="top">Top</option>
-                            <option value="middle">Mid</option>
-                            <option value="ADC">Bot</option>
-                            <option value="support">Support</option>
-                            <option value="jungle">Jungle</option>
+                            <option ng-repeat="(key, value) in roles" value="{{key}}">{{value}}</option>
                         </select>
                         <p ng-if="summoners[n].winRate" class="form-control">Win Rate: {{ summoners[n].winRate.toFixed(2) }} %</p>
                         <p ng-if="!summoners[n].winRate" class="form-control">Win Rate: ???????</p>

@@ -7,6 +7,7 @@ angular
 
 function HomeController($scope, $rootScope, ModalService, SummonerService) {
     $scope.names = [];
+    $scope.roles = SummonerService.roles;
 
     // Get champion data from service
     var updateData = function(){

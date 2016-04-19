@@ -10,6 +10,14 @@ function SummonerService(APIService, $rootScope){
         // All Champ Data
         fac.champs = [];
 
+        fac.roles = {
+            top: 'Top',
+            middle: 'Mid',
+            ADC: 'Bot',
+            support: 'Support',
+            jungle: 'Jungle'
+        };
+
         // Team Damages
         var emptyDamage = {phy: 0, mag: 0, def: 0};
         fac.redDamage = emptyDamage;
@@ -60,9 +68,35 @@ function SummonerService(APIService, $rootScope){
             update();
         };
 
-        // Get updated role from dropdown
+        // Get updated role from dropdown; Also updates other roles on team with available roles
         fac.updateRole = function(idx, to){
+            // Update This Summoner
             fac.summoners[idx].role = to;
+            // Update Summoner's Team to Fill Free Roles
+            var roles = Object.keys(fac.roles);
+            var min = (idx < 5) ? 0 : 5;
+            // Couner for free role
+            var c = -1;
+            // Find Free Roles on the team
+            for (var i = min; i < 5+min; i++){
+                if (i != idx && fac.summoners[i].role == to || !fac.summoners[i].role){
+                    // Find an unused role
+                    while (++c < 5){
+                        var free = true;
+                        for (var j = min; j < 5+min; j++) {
+                            if (roles[c] == fac.summoners[j].role){
+                                free = false;
+                                break;
+                            }
+                        }
+                        if (free){
+                            // Fill the conflicted or empty summoner with the free role
+                            fac.summoners[i].role = roles[c];
+                            break;
+                        }
+                    }
+                }
+            }
             update();
         };
 
@@ -132,8 +166,6 @@ function SummonerService(APIService, $rootScope){
                 return ggData['patchWin'][4];
             }
             // No data available, no data to give
-            console.log("No data");
-            console.log(ggData);
             return null;
         };
 
@@ -175,7 +207,6 @@ function SummonerService(APIService, $rootScope){
                     }
                 }
                 // Calculate Team Win % (Note: uses power 2 to increase significance of discrepancies
-                console.log(fac.summoners);
                 if (idx > 4){
                     fac.redWin += (Math.pow(fac.summoners[idx].winRate/100, 2) || .25);
                 } else {
