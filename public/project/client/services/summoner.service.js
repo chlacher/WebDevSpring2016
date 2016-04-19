@@ -10,6 +10,11 @@ function SummonerService(APIService, $rootScope){
         // All Champ Data
         fac.champs = [];
 
+        // Team Damages
+        var emptyDamage = {phy: 0, mag: 0, def: 0};
+        fac.redDamage = emptyDamage;
+        fac.blueDamage = emptyDamage;
+
         // Array of Summoners
         fac.summoners = new Array(10);
         for (var n = 0; n<10; n++){
@@ -84,14 +89,19 @@ function SummonerService(APIService, $rootScope){
         };
 
         // Champion GG Data by ChampId for specific role
-        var getChampGGData = function(champId, type, role){
+        var getChampGGData = function(champId, type, role, useDef){
+            console.log(role);
             for (var idx in fac.champs){
                 var champ = fac.champs[idx];
                 if (champ.id == champId){
                     for (var idx2 in champ[type]){
-                        if (champ[type][idx2].role.toLowerCase() == role.toLowerCase()){
+                        if (role && champ[type][idx2].role.toLowerCase() == role.toLowerCase()){
                             return champ[type][idx2];
                         }
+                    }
+                    // This role not found, using default role data
+                    if (useDef){
+                        return champ[type][0];
                     }
                 }
             }
@@ -119,19 +129,49 @@ function SummonerService(APIService, $rootScope){
                 return ggData['patchWin'][4];
             }
             // No data available, no data to give
+            console.log("No data");
+            console.log(ggData);
             return null;
         };
 
-        fac.calcAdjustedWin = function(){
+        var addDamage = function(obj, summoner){
+            var champId = summoner.champ.id;
+            var ggData = getChampGGData(champId, 'chGGdata', summoner.role, true);
+            var ggStats = getChampGGData(champId, 'chGGstats', summoner.role, true)['general'];
+
+            var phy = ggStats['totalDamageDealtToChampions'] * (100 - ggData['dmgComposition']['magicDmg'])/100
+            var mag = ggStats['totalDamageDealtToChampions'] * (100 - ggData['dmgComposition']['physicalDmg'])/100
+            var def = ggStats['totalHeal'] + ggStats['totalDamageTaken'];
+
+            return {
+                phy: obj.phy + 150*phy/fac.avgDmg,
+                mag: obj.mag + 150*mag/fac.avgDmg,
+                def: obj.def + 50*def/fac.avgDmg
+            }
+        };
+
+        // Calculate Stats to Display
+        fac.calcStats = function(){
+            fac.redDamage = emptyDamage;
+            fac.blueDamage = emptyDamage;
             for (var idx in fac.summoners){
                 var summ = fac.summoners[idx]
-                // See if champ selected
+                // Calculate Winrates
                 if (summ.champ && summ.role){
                     // Step 1: Check for Summoner Winrate
                     fac.summoners[idx].winRate = getSumChampWinrate(summ);
                 }
+                // Calculate Damage
+                if (summ.champ){
+                    if (idx > 4){
+                        fac.redDamage = addDamage(fac.redDamage, summ);
+                    } else {
+                        fac.blueDamage = addDamage(fac.blueDamage, summ);
+                    }
+                }
 
             }
+            fac.update();
         };
 
         // Listeners: callback functions that will be hit on update
@@ -144,8 +184,7 @@ function SummonerService(APIService, $rootScope){
 
         // Hit functions triggered by update
         var update = function(){
-            fac.update();
-            fac.calcAdjustedWin();
+            fac.calcStats();
         };
 
         // update: Hit all listening callback functions

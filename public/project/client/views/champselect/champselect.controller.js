@@ -44,6 +44,7 @@ function ChampSelectController($scope, $rootScope, ModalService, SummonerService
         // Populate local variables with list of all champions
         APIService.GET("champ", function(champions){
             $rootScope.version = champions.version;
+            SummonerService.avgDmg = champions.avgDmg;
             for(var idx in champions.champions){
                 SummonerService.champs.push(champions.champions[idx]);
                 champs.push(miniChamp(champions.champions[idx]));

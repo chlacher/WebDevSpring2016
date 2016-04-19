@@ -2,6 +2,28 @@
     <div class="row">
         <div class="blue col-md-5 col-md-offset-1">
             <h1>Blue Team <small id="bl-percent">50%</small></h1>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar"
+                     aria-valuenow="{{ blueDamage.phy }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ blueDamage.phy }}%">
+                    Physical Damage
+                </div>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                     aria-valuenow="{{ blueDamage.mag }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ blueDamage.mag }}%">
+                    Magic Damage
+                </div>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar"
+                     aria-valuenow="{{ blueDamage.def }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ blueDamage.def }}%">
+                    Tankiness
+                </div>
+            </div>
+
             <div class="champDisp" ng-repeat="n in [0,1,2,3,4]">
                 <div class="row">
                         <img class="champIcon" ng-click="selectChamp(n)" src="{{ summoners[n].icon }}">
@@ -22,7 +44,7 @@
                         <select ng-model="summoners[n].role" ng-change="updateRole(n, summoners[n].role)" class="form-control">
                             <option value="top">Top</option>
                             <option value="middle">Mid</option>
-                            <option value="bot">Bot</option>
+                            <option value="ADC">Bot</option>
                             <option value="support">Support</option>
                             <option value="jungle">Jungle</option>
                         </select>

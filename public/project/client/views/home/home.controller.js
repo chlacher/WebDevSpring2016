@@ -11,6 +11,8 @@ function HomeController($scope, $rootScope, ModalService, SummonerService) {
     // Get champion data from service
     var updateData = function(){
         $scope.summoners = SummonerService.summoners;
+        $scope.blueDamage = SummonerService.blueDamage;
+        $scope.redDamage = SummonerService.redDamage;
     };
 
     // Call updatedata on update
