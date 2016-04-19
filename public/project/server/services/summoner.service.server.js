@@ -1,5 +1,7 @@
 module.exports = function (app, riotAPI) {
 
+
+    app.get("/api/project/version", getLatestVersion);
     app.get("/api/project/summoner/:name", getSummonerByName);
 
     function getSummonerByName(req, res){
@@ -16,7 +18,13 @@ module.exports = function (app, riotAPI) {
                 });
             }
         });
-    }
+    };
+
+    function getLatestVersion(req, res){
+        riotAPI('versions', 'na', 'static-data', 1.2, function(versions){
+            res.json(versions[0]);
+        });
+    };
 
 
 };

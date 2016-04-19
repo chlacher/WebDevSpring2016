@@ -1,0 +1,55 @@
+<div ng-controller="AdminController" class="regModal center" ng-show="open">
+    <a class="closeModal pull-right" ng-click="close()">X</a>
+
+    <h1>Admin</h1>
+    <div class="btn-group" role="group" aria-label="...">
+        <button ng-click="changeSection('data')" type="button" class="btn btn-default">Data</button>
+        <button ng-click="changeSection('users')" type="button" class="btn btn-default">Users</button>
+    </div>
+
+        <div ng-if="section == 'data'">
+            <h2>Data:</h2>
+            <h3 ng-if="!updating">Current Data is from Patch: {{ $root.version }}</h3>
+            <button ng-if="!updating && !latest" ng-click="checkUpdate()" class="form-control">Check for New Version</button>
+            <h3 ng-if="!updating && latest && $root.version == latest">Latest version already installed</h3>
+            <h3 ng-if="!updating && latest && $root.version != latest">New Version ({{latest}}) availible</h3>
+            <button ng-if="!updating && latest && $root.version != latest" ng-click="update(latest)" class="form-control">Upgrade Now</button>
+            <h3 ng-if="updating">Data Update is now in progress. You can close this window, and continue using the site. Do not attempt to update again for at least 5 minutes</h3>
+        </div>
+        <div ng-if="section == 'users'">
+            <div class="modal-scrollable">
+                <table class="table">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Username</th>
+                        <th>Summoner Name</th>
+                        <th>Region</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in users" ng-click="edit(user)">
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.summoner }}</td>
+                        <td>{{ user.region }}</td>
+                        <td>{{ user.role }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div ng-if="section == 'user'" class="form-horizontal">
+            <h3>Editing {{ user.username }}</h3>
+            <form ng-if="user" class="form-horizontal">
+                <input ng-model="user.username" class="form-control" placeholder="Username">
+                <input ng-model="user.password" type="password" class="form-control" placeholder="Password">
+                <input ng-model="user.summoner" class="form-control" placeholder="Summoner Name">
+                <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="user.region"></select>
+                <input ng-model="user.role" class="form-control" placeholder="Role">
+                <button ng-click="updateChamp()" class="btn form-control btn-default">Update</button>
+                <div class="red">{{error}}</div>
+            </form>
+        </div>
+
+
+</div>

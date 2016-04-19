@@ -33,13 +33,20 @@ function ProfileController($scope, ModalService, UserService) {
     var modalStatus = function(){
         $scope.open = ModalService.modals['profile'];
     };
+
+    // Switch to Admin control
+    $scope.admin = function(){
+        ModalService.closeModal('profile');
+        ModalService.openModal('admin');
+    }
+
     // Listen for change in modal status
     ModalService.listen(modalStatus);
 
     // Listen for update in user status
     var userStatus = function(){
         $scope.data = UserService.user;
-    }
+    };
     UserService.listen(userStatus);
 
     modalStatus();

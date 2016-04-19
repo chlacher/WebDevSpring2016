@@ -1,10 +1,21 @@
 module.exports = function(User) {
     var api = {
+        findAll: findAll,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         createUser: createUser,
         updateUser: updateUser
     };
+
+    function findAll(cb){
+        User.find({}, function(err, users){
+            if (err || !users){
+                cb(null);
+            } else {
+                cb(users);
+            }
+        });
+    }
 
     function findUserByUsername(username, cb){
         User.find({username: username}, function(err, users){

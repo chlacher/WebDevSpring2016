@@ -1,9 +1,16 @@
 module.exports = function (app, model) {
 
+    app.get("/api/project/user/", getAllUsers);
     app.get("/api/project/user/:username/:password", login);
     app.get("/api/project/user/:username", getUserByUsername);
     app.post("/api/project/user/", createUser);
     app.put("/api/project/user/:id", updateUserById);
+
+    function getAllUsers (req, res){
+        model.findAll(function(users){
+            res.json(users);
+        })
+    }
 
     function login (req, res){
         var u = req.params.username;

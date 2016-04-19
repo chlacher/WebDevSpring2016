@@ -3,7 +3,7 @@ module.exports = function (db) {
 
     var data = {};
     // User
-    var UserSchema = new db.Schema({username: String, password: String, summoner: String, region: String});
+    var UserSchema = new db.Schema({username: String, password: String, summoner: String, region: String, role: {type: String, default: "user"}});
     data.User = db.model("Project_User", UserSchema);
 
     // Champion Schema: Stores all relevant information about champion (to reduce total API calls and remove API uptime dependability)

@@ -13,6 +13,10 @@ function UserService(APIService){
 
     fac.user = defaultUser;
 
+    fac.getAllUsers = function(callback){
+      APIService.GET('user', callback);
+    };
+
     fac.login = function(user){
         fac.user = user;
         fac.update();
