@@ -1,7 +1,7 @@
 <div class="backdrop">
     <div class="row">
         <div class="blue col-md-5 col-md-offset-1">
-            <h1>Blue Team <small id="bl-percent">50%</small></h1>
+            <h1>Blue Team <small id="bl-percent">{{ (blueWin*100).toFixed(2) }} %</small></h1>
 
             <div class="progress">
                 <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar"
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="red col-md-5">
-            <h1>Red Team <small id="bl-percent">50%</small></h1>
+            <h1>Red Team <small id="bl-percent">{{ ((1-blueWin)*100).toFixed(2) }} %</small></h1>
 
             <div class="progress">
                 <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar"

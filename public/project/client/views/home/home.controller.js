@@ -13,6 +13,7 @@ function HomeController($scope, $rootScope, ModalService, SummonerService) {
         $scope.summoners = SummonerService.summoners;
         $scope.blueDamage = SummonerService.blueDamage;
         $scope.redDamage = SummonerService.redDamage;
+        $scope.blueWin = (SummonerService.blueWin)/(SummonerService.blueWin + SummonerService.redWin);
     };
 
     // Call updatedata on update

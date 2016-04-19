@@ -15,6 +15,10 @@ function SummonerService(APIService, $rootScope){
         fac.redDamage = emptyDamage;
         fac.blueDamage = emptyDamage;
 
+        // Team Win Score
+        fac.redWin = 50;
+        fac.blueWin = 50;
+
         // Array of Summoners
         fac.summoners = new Array(10);
         for (var n = 0; n<10; n++){
@@ -152,7 +156,9 @@ function SummonerService(APIService, $rootScope){
         // Calculate Stats to Display
         fac.calcStats = function(){
             fac.redDamage = emptyDamage;
+            fac.redWin = 0;
             fac.blueDamage = emptyDamage;
+            fac.blueWin = 0;
             for (var idx in fac.summoners){
                 var summ = fac.summoners[idx]
                 // Calculate Winrates
@@ -168,6 +174,14 @@ function SummonerService(APIService, $rootScope){
                         fac.blueDamage = addDamage(fac.blueDamage, summ);
                     }
                 }
+                // Calculate Team Win % (Note: uses power 2 to increase significance of discrepancies
+                console.log(fac.summoners);
+                if (idx > 4){
+                    fac.redWin += (Math.pow(fac.summoners[idx].winRate/100, 2) || .25);
+                } else {
+                    fac.blueWin += (Math.pow(fac.summoners[idx].winRate/100, 2) || .25);
+                }
+
 
             }
             fac.update();
