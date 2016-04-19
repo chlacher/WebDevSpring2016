@@ -6,6 +6,7 @@ angular
 
 
 function HomeController($scope, $rootScope, ModalService, SummonerService) {
+    $scope.names = [];
 
     // Get champion data from service
     var updateData = function(){
@@ -21,6 +22,17 @@ function HomeController($scope, $rootScope, ModalService, SummonerService) {
         SummonerService.active = n;
         ModalService.openModal('champselect');
     };
+
+    $scope.searchSummoner = function(idx){
+        SummonerService.searchSummoner($scope.names[idx], idx);
+    };
+
+    $scope.clearSummoner = function(idx){
+        $scope.names[idx] = "";
+        SummonerService.clearSummoner(idx);
+    };
+
+    SummonerService.listen(updateData);
 
     updateData();
 

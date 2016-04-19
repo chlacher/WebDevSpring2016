@@ -10,4 +10,5 @@ module.exports = function (app, db) {
     // Services
     var userService = require("./services/user.service.server.js")(app, userModel);
     var champService = require("./services/champ.service.server.js")(app, champModel, riotAPI, cggAPI);
+    var summonerService = require("./services/summoner.service.server.js")(app, riotAPI);
 }

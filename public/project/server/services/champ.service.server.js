@@ -69,7 +69,7 @@ module.exports = function (app, model, riotAPI, cggAPI) {
 
     // Gets latest version from riot server with list of champs, gets champ data from champion.gg
     function updateData (req, res){
-        riotAPI('versions', 'na', 'static-data', function(versions){
+        riotAPI('versions', 'na', 'static-data', 1.2, function(versions){
                 var version = versions[0];
                 // Check if latest data version already exists
                 model.getAllChampData(version, function(data){
@@ -77,7 +77,7 @@ module.exports = function (app, model, riotAPI, cggAPI) {
                             res.json({data: data, response: "Latest Version Already Up"});
                         } else {
                             // Get all champions from riot API
-                            riotAPI('champion', 'na', 'static-data', function(riotData){
+                            riotAPI('champion', 'na', 'static-data', 1.2, function(riotData){
                                     var riotChamps = riotData.data;
                                     // Parse information into JSON object for DB storage
                                     var champKeys = [];

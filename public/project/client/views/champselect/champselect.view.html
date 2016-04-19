@@ -5,7 +5,7 @@
         <input type="text" class="form-control" ng-model="query" ng-change="filter()">
     </div>
     <div class="modal-scrollable">
-        <span ng-repeat="champ in filtered" ng-click="choose(champ.key)">
+        <span ng-repeat="champ in filtered" ng-click="choose(champ)">
             <img class="champIcon" src="http://ddragon.leagueoflegends.com/cdn/{{$root.version}}/img/champion/{{champ.key}}.png">
         </span>
     </div>
