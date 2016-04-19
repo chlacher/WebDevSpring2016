@@ -5,6 +5,7 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
+    overflow-x: hidden;
 }
 
 
@@ -89,10 +90,11 @@ body {
 }
 
 .champIcon {
-    padding: 1em;
-    width: 26%;
-    max-width: 160px;
+    padding: 0;
+    max-width: 135px;
     height: auto;
+    padding-top: 1em;
+    width: 20%;
 }
 .left {
     float: left;
@@ -162,4 +164,27 @@ body {
 }
 .in-dd-container > .dd {
     width: 36.333%;
+}
+
+.left-text > h1 {
+    transform: rotate(270deg);
+    position: absolute;
+    left: 0;
+    width: 13em;
+    height: 11em;
+    z-index: -1;
+}
+
+.right-text > h1 {
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top: 5em;
+    width: 13em;
+    height: 11em;
+    z-index: -1;
+}
+
+.gap-below {
+    margin-bottom: 200px;
 }
