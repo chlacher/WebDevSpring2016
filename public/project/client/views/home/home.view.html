@@ -19,15 +19,15 @@
                                 </span>
                         </div>
 
-                        <select class="form-control">
-                            <option value="0">Role Unknown</option>
+                        <select ng-model="summoners[n].role" ng-change="updateRole(n, summoners[n].role)" class="form-control">
                             <option value="top">Top</option>
-                            <option value="mid">Mid</option>
+                            <option value="middle">Mid</option>
                             <option value="bot">Bot</option>
-                            <option value="sup">Support</option>
-                            <option value="jg">Jungle</option>
+                            <option value="support">Support</option>
+                            <option value="jungle">Jungle</option>
                         </select>
-                        <p class="form-control">Win %: </p>
+                        <p ng-if="summoners[n].winRate" class="form-control">Win Rate: {{ summoners[n].winRate.toFixed(2) }} %</p>
+                        <p ng-if="!summoners[n].winRate" class="form-control">Win Rate: ???????</p>
                     </div>
                 </div>
             </div>

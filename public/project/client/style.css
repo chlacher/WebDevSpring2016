@@ -112,6 +112,7 @@ body {
     height:75%;
     border: solid;
     background-color:sandybrown;
+    z-index: 10000;
 }
 
 .loginModal {
@@ -122,6 +123,7 @@ body {
     height: 30%;
     background-color:gray;
     border: solid;
+    z-index: 10000;
 }
 
 .regModal {
@@ -132,6 +134,7 @@ body {
     height: 60%;
     background-color:gray;
     border: solid;
+    z-index: 10000;
 }
 
 .modal-content{

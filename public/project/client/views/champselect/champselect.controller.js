@@ -6,10 +6,11 @@ angular
 
 
 function ChampSelectController($scope, $rootScope, ModalService, SummonerService, APIService, UserService) {
-
-    var champs = [];
     $scope.query = "";
+    // Holds Champs to be shown in popup
     $scope.filtered = [];
+    // Holds less memory-intensive version of champ list
+    var champs = [];
 
     // Filter array to those matching query
     $scope.filter = function() {
@@ -19,7 +20,7 @@ function ChampSelectController($scope, $rootScope, ModalService, SummonerService
             $scope.filtered = [];
             $.each(champs, function(idx){
                 if (champs[idx].name.toUpperCase().indexOf($scope.query.toUpperCase()) > -1){
-                    $scope.filtered.push(champs[idx]);
+                    $scope.filtered.push(miniChamp(champs[idx]));
                 }
             });
         }
@@ -38,12 +39,14 @@ function ChampSelectController($scope, $rootScope, ModalService, SummonerService
 
     // Hit the Riot API and get all the champion names
     var getChamps = function(region) {
+        SummonerService.champs = [];
         champs = [];
         // Populate local variables with list of all champions
         APIService.GET("champ", function(champions){
             $rootScope.version = champions.version;
             for(var idx in champions.champions){
-                champs.push(champions.champions[idx]);
+                SummonerService.champs.push(champions.champions[idx]);
+                champs.push(miniChamp(champions.champions[idx]));
             }
             $scope.filtered = champs;
         });
@@ -53,15 +56,22 @@ function ChampSelectController($scope, $rootScope, ModalService, SummonerService
     var modalStatus = function(){
         $scope.open = ModalService.modals['champselect'];
     };
+
+    // Less memory-intensive representaiton of champion
+    var miniChamp = function(champ){
+        return {
+            id: champ.id,
+            key: champ.key,
+            name: champ.name
+        }
+    };
+
+    // Listen for change in modal status
     ModalService.listen(modalStatus);
 
-    // Current User (if exists)
-    var userStatus = function(){
-        getChamps(UserService.user.region);
-    };
-    // Listen for change in modal status
-    UserService.listen(userStatus);
+    // Populate Champion Lists
+    getChamps();
 
-    userStatus();
+    //userStatus();
     modalStatus();
 }

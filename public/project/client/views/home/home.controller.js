@@ -32,7 +32,9 @@ function HomeController($scope, $rootScope, ModalService, SummonerService) {
         SummonerService.clearSummoner(idx);
     };
 
-    SummonerService.listen(updateData);
+    $scope.updateRole = function(idx, to){
+        SummonerService.updateRole(idx, to);
+    };
 
     updateData();
 
