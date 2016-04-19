@@ -8,8 +8,7 @@ function UserService(APIService){
 
     // Default Anonymous Settings
     var defaultUser = {
-        region: 'NA',
-        rank: 'All'
+        region: 'NA'
     };
 
     fac.user = defaultUser;
@@ -45,8 +44,7 @@ function UserService(APIService){
             "username": data.username,
             "password": data.password,
             "summoner": data.summoner,
-            "region": data.region,
-            "rank": data.rank
+            "region": data.region
         }, callback);
 
     };

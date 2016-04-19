@@ -1,39 +1,52 @@
-module.exports = function(users) {
-    var api = {};
-
-    api.findUserByUsername = function(username) {
-        for (var idx in users) {
-            if (users[idx].username === username)
-                return users[idx];
-        }
-        return null;
+module.exports = function(User) {
+    var api = {
+        findUserByUsername: findUserByUsername,
+        findUserByCredentials: findUserByCredentials,
+        createUser: createUser,
+        updateUser: updateUser
     };
 
-    api.findUserByCredentials = function(creds) {
-        for (var idx in users) {
-            if (users[idx].username.toLowerCase() == creds.username.toLowerCase() &&
-                users[idx].password == creds.password)
-                return users[idx];
-        }
-        return null;
-    };
-
-    api.createUser = function(user) {
-        var now = new Date();
-        user._id = now.getTime();
-        users.push(user);
-        return user;
-    };
-
-    api.updateUser = function(id, user) {
-        for (var idx in users) {
-            if (users[idx]._id == id) {
-                users[idx] = user;
-                return user;
+    function findUserByUsername(username, cb){
+        User.find({username: username}, function(err, users){
+            if (err || !users){
+                cb(null);
+            } else {
+                cb(users[0]);
             }
-        }
-        return null;
-    };
+        });
+    }
+
+    function findUserByCredentials(creds, cb) {
+        User.find({username: creds.username, password: creds.password}, function (err, users) {
+            if (err || !users) {
+                cb(null);
+            } else {
+                cb(users[0]);
+            }
+        });
+    }
+
+    function createUser(user, cb) {
+        User.create(user, function(error, newUser){
+            cb(newUser);
+        });
+    }
+
+    function updateUser(id, user, cb) {
+        User.update(
+            {_id: id},
+            {username: user.username, password: user.password, summoner: user.summoner, region: user.region},
+            function(err, numberAffected, rawResponse) {
+                console.log(err);
+                console.log(numberAffected);
+                console.log(rawResponse);
+                if (!err) {
+                    cb({success: "User Updated"});
+                } else {
+                    cb(err);
+                }
+            });
+    }
 
     return api;
 };

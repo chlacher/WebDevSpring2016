@@ -12,7 +12,6 @@ function RegisterController($scope, $rootScope, ModalService, UserService) {
         password: "",
         confirm: "",
         summoner: "",
-        rank: "All",
         region: "NA"
     };
 

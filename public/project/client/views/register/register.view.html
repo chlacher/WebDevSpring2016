@@ -7,7 +7,6 @@
             <input ng-model="data.password" type="password" class="form-control" placeholder="Password">
             <input ng-model="data.confirm" type="password" class="form-control" placeholder="Confirm Password">
             <input ng-model="data.summoner" class="form-control" placeholder="Summoner Name">
-            <select class="form-control" data-ng-options="r for r in $root.ranks" data-ng-model="data.rank"></select>
             <select class="form-control" data-ng-options="r for r in $root.regions" data-ng-model="data.region"></select>
             <button ng-click="register()" class="btn form-control btn-default">Register</button>
             <div class="red">{{error}}</div>

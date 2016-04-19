@@ -21,13 +21,13 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
         process.env.OPENSHIFT_APP_NAME;
 }
 
-db.connect(connectionString  + '/assignment');
+db.connect(connectionString);
 
 // Client
 app.use(express.static(__dirname + '/public/'));
 // Server
 require("./public/assignment/server/app.js")(app, db);
-require("./public/project/server/app.js")(app);
+require("./public/project/server/app.js")(app, db);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;

@@ -8,7 +8,6 @@ angular
 function HeaderController($scope, $rootScope, UserService, ModalService) {
 
     $rootScope.regions = ["NA", "BR", "EUNE", "EUW", "KR", "LAN", "LAS", "OCE", "PBE", "RU", "TR"];
-    $rootScope.ranks = ["All", "Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master", "Challenger"];
 
     $scope.login = function(){
         ModalService.openModal('login');
