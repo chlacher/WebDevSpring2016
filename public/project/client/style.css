@@ -89,9 +89,10 @@ body {
 }
 
 .champIcon {
-    width:120px;
-    height:120px;
-    padding: 1px;
+    padding: 1em;
+    width: 26%;
+    max-width: 160px;
+    height: auto;
 }
 .left {
     float: left;
@@ -152,4 +153,13 @@ body {
 }
 .padded{
     padding: 1em;
+}
+.in-dd-container {
+    width: 100%;
+}
+.in-dd-container > .in {
+    width: 63.337%;
+}
+.in-dd-container > .dd {
+    width: 36.333%;
 }
