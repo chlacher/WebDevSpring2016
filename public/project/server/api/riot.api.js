@@ -15,6 +15,12 @@ module.exports = function(data, region, endpoint, version, cb) {
             console.log("An error has occurred");
             cb(null);
         }
-        cb(JSON.parse(body));
+        try {
+            var json = JSON.parse(boddy);
+            cb(json);
+        }
+        catch(err){
+            cb(err);
+        }
     });
 }
