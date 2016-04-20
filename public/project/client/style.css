@@ -157,29 +157,33 @@ div.welcome {
 }
 
 .loginModal {
-    position:fixed;
-    top:20%;
-    left: 35%;
-    width: 30%;
-    height: 30%;
-    background-color:gray;
+    position: fixed;
+    top: 25%;
+    left: 21%;
+    width: 73%;
+    height: 38%;
+    background-color: gray;
     border: solid;
     z-index: 10000;
     padding-left: 2%;
     padding-right: 2%;
+    max-width: 400px;
+    max-height: 400px;
 }
 
 .regModal {
-    position:fixed;
-    top:20%;
-    left: 35%;
-    width: 30%;
+    position: fixed;
+    top: 25%;
+    left: 21%;
+    width: 73%;
     height: 60%;
-    background-color:gray;
+    background-color: gray;
     border: solid;
     z-index: 10000;
     padding-left: 2%;
     padding-right: 2%;
+    max-width: 400px;
+    max-height: 600px;
 }
 
 .modal-content{
@@ -239,4 +243,47 @@ a.visible {
 
 .gap-below {
     padding-bottom: 35px;
+}
+
+img.head {
+    border-radius: 50%;
+    border-color: goldenrod;
+    border-style: inset;
+    border-width: medium;
+    width: 96px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.mini-button {
+    height: 96px;
+    font-size: 30px;
+    width: 50px;
+}
+
+.mini-button > span {
+    font-size: 42px;
+    padding: 0;
+}
+
+.summonerModal {
+    text-align: center;
+    position: fixed;
+    width: 500px;
+    height: 300px;
+    top: 35%;
+    left: 5%;
+    right: 5%;
+    background: black;
+    max-width: 94%;
+    max-height: 30%;
+    z-index: 9999;
+}
+
+.summonerModal > form {
+    width: 80%;
+    margin-left: 10%;
 }

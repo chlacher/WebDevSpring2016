@@ -1,0 +1,27 @@
+<div ng-controller="TeamBuilderController" class="summonerModal center" ng-show="open">
+    <a class="visible closeModal pull-right" ng-click="close()">X</a>
+
+    <h1 class="siteHeader">Select Data</h1>
+    <form>
+        <div ng-if="!summoners[idx].name" class="input-group in-dd-container">
+            <input type="text" class="form-control" ng-model="names[idx]" placeholder="Summoner Name">
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button" ng-click="searchSummoner(idx)">Q</button>
+            </span>
+        </div>
+        <div ng-if="summoners[idx].name" class="input-group in-dd-container">
+            <p class="form-control">{{ summoners[idx].name }}</p>
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button" ng-click="clearSummoner(idx)">X</button>
+            </span>
+        </div>
+        <div class="input group in-dd-container">
+            <select ng-model="summoners[idx].role" ng-change="updateRole(idx, summoners[idx].role)" class="dd pull-right form-control">
+                <option ng-repeat="(key, value) in roles" value="{{key}}">{{value}}</option>
+            </select>
+            <p ng-if="summoners[idx].winRate" class="in pull-left form-control">Win: {{ summoners[idx].winRate.toFixed(2) }} %</p>
+            <p ng-if="!summoners[idx].winRate" class="in pull-left form-control">Win: ????</p>
+        </div>
+        <img class="head pull-right" ng-click="selectChamp(idx)" src="{{ summoners[idx].icon }}">
+    </form>
+</div>
