@@ -11,11 +11,12 @@
                 <button type="button" class="btn btn-default" ng-if="!user._id" ng-click="login()">Login</button>
                 <button type="button" class="btn btn-default" ng-if="user._id" ng-click="logout()">Logout</button>
                 <div ng-if="user._id" class="btn-group">
-                    <p class="form-control">Welcome, <a ng-click="profile()">{{user.summoner}}</a></p>
+                    <p class="hidden-xs form-control">Welcome, <a ng-click="profile()">{{user.summoner}}</a></p>
+                    <p class="visible-xs form-control"><a ng-click="profile()">{{user.summoner}}</a></p>
                 </div>
             </div>
         </div>
     </div>
 </nav>
-<div class="gap-below visible-sm"/>
+<div class="gap-below visible-xs visible-sm"/>
 <div class="gap-below visible-xs"/>

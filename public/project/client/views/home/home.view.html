@@ -1,40 +1,40 @@
 <div class="backdrop">
     <div class="row">
         <div class="btn-group btn-group-justified" role="group" data-toggle="buttons">
-            <label ng-click="toggle('welcome')" class="btn btn-primary active">
-                <input type="radio" name="options" autocomplete="off" checked>Welcome
+            <label ng-click="toggle('welcome')" ng-class="active('w')" class="btn btn-primary">
+                <input type="radio" name="options" autocomplete="off">Welcome
             </label>
-            <label ng-click="toggle('tutorial1')" class="btn btn-primary">
+            <label ng-click="toggle('tutorial1')" ng-class="active('t')" class="btn btn-primary">
                 <input type="radio" name="options" autocomplete="off">Tutorial
             </label>
-            <label ng-click="toggle('credits')" class="btn btn-primary">
+            <label ng-click="toggle('credits')" ng-class="active('c')" class="btn btn-primary">
                 <input type="radio" name="options" autocomplete="off">Credits
             </label>
         </div>
     </div>
 
     <div class="row">
-        <div ng-if="section=='welcome' || !section" class="col-md-4 greenText">
+        <div ng-if="section=='welcome' || !section" class="col-xs-12 col-md-4 center greenText">
             <p>Welcome to LoLComps, a data-driven website built to design optimal team compositions. Combining experience, performance, and compositional stats,
         you can use this tool for the compeatitive advantage.</p>
             <p>I decided to make this tool because I play a decent amount and always thought it'd be useful to have one centralized tool to help choose from the
         endless pool of champions instead of clicking through countless websites as the timer runs down. There is still a lot of improvement for the
         scoring algorthm, and a few features that are in the works, but I think there is huge growth potential.</p>
         </div>
-        <div ng-if="section=='tutorial1'" class="col-md-4 col-md-offset-4 greenText">
+        <div ng-if="section=='tutorial1'" class="col-xs-12 col-md-4 col-md-offset-4 center greenText">
             <img class="padded" src="http://i.imgur.com/f4ZrIai.png">
             <p>LoLComps is intended to be used during champion select, and as such it is layed out very similar. For each player, you see this
             Summoner name is optional, but will make the data more accurate. For example, if one player is very good or inexperienced with a champion, it can
             completely change the viability of the pick.</p>
             <img class="" src="http://i.imgur.com/tQBHIED.png">
         </div>
-        <div ng-if="section=='tutorial2'" class="col-md-4 col-md-offset-4 greenText">
+        <div ng-if="section=='tutorial2'" class="col-xs-12 col-md-4 col-md-offset-4 center greenText">
             <p>In addition to straight up winrate, we also analyze damage composition. Ideally a balanced team composition will have the three nearly filled up.
                 Do note that some stats, such as shields, are not measured or reported by riot or anyone so heal supports will look artificially better. Generally speaking,
                 there is little value in getting more than full of any of the 3 bars, as itemization will nullify the advantage.</p>
             <img class="padded" src="http://i.imgur.com/PyajzlW.png">
         </div>
-        <div ng-if="section=='credits'" class="col-md-4 col-md-offset-8 greenText">
+        <div ng-if="section=='credits'" class="col-xs-12 col-md-offset-8 greenText">
             <p>Using API Data From</p>
             <ul>
                 <li><a href="http://developer.riotgames.com/">Riot Games API</a></li>
@@ -56,13 +56,14 @@
     </div>
 
     <div class="row">
-        <div ng-if="section=='welcome' || !section" ng-click="toggle('tutorial1')" class="col-md-4 btn btn-info">---></div>
-        <div ng-if="section=='tutorial1'" ng-click="toggle('tutorial2')" class="col-md-4 col-md-offset-4 btn btn-info">---></div>
-        <div ng-if="section=='tutorial2'" ng-click="toggle('credits')" class="col-md-4 col-md-offset-4 btn btn-info">---></div>
+        <div ng-if="section=='welcome' || !section" ng-click="toggle('tutorial1')" class="col-xs-12 col-md-4 btn btn-info">---></div>
+        <div ng-if="section=='tutorial1'" ng-click="toggle('tutorial2')" class="col-xs-12 col-md-4 col-md-offset-4 btn btn-info">---></div>
+        <div ng-if="section=='tutorial2'" ng-click="toggle('credits')" class="col-xs-12 col-md-4 col-md-offset-4 btn btn-info">---></div>
+        <a class="visible-xs col-xs-12 btn btn-warning" href="#team">Get Started Now</a>
     </div>
 
 
-        <a class="getStarted btn btn-warning btn-lg btn-huge" href="#team">Get Started Now<a/>
+        <a class="hidden-xs getStarted btn btn-warning btn-lg btn-huge" href="#team">Get Started Now<a/>
 </div>
 
 
