@@ -127,6 +127,10 @@ div.welcome {
     padding:1em;
 }
 
+.ultrawide{
+    width: 110%;
+}
+
 .champIcon {
     padding: 0;
     max-width: 135px;

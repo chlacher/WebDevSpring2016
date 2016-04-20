@@ -16,7 +16,7 @@ module.exports = function(data, region, endpoint, version, cb) {
             cb(null);
         }
         try {
-            var json = JSON.parse(boddy);
+            var json = JSON.parse(body);
             cb(json);
         }
         catch(err){

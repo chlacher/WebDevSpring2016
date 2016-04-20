@@ -1,6 +1,6 @@
 <div class="backdrop"></div>
 <!--Top of the Page: Scores -->
-<div class="row">
+<div class="row padded">
     <div class="blue center col-xs-6 col-sm-5 col-sm-offset-1 col-lg-3 col-lg-offset-2">
         <h1>Blue Team <p class="visible-xs"/> <small id="bl-percent">{{ (blueWin*100).toFixed(2) }} %</small></h1>
     </div>
@@ -17,7 +17,7 @@
     <!-- Blue Team Stuff -->
     <div class="hidden-xs blue col-sm-4 col-md-3 col-lg-2 col-xl-2">
         <div ng-repeat="n in [0,1,2,3,4]">
-            <div class="input-group pull-left padded">
+            <div class="input-group pull-left padded ultrawide">
                 <div ng-if="!summoners[n].name" class="input-group in-dd-container">
                     <input type="text" class="form-control" ng-model="names[n]" placeholder="Summoner Name">
                                     <span class="input-group-btn">
@@ -50,7 +50,7 @@
         <div ng-repeat="n in [0,1,2,3,4]" class="mini-button">
             <span class="btn glyphicon glyphicon-align-justify" ng-click="openModal(n)"></span>
             <p ng-if="summoners[n].winRate" class="form-control">{{ summoners[n].winRate.toFixed(0) }} %</p>
-            <p ng-if="!summoners[n].winRate" class="form-control">{{ n }}</p>
+            <p ng-if="!summoners[n].winRate" class="form-control">??</p>
         </div>
     </div>
     <!-- End Blue Team Mini Stuff ->
@@ -59,14 +59,14 @@
         <div ng-repeat="n in [5,6,7,8,9]" class="mini-button">
             <span class="btn glyphicon glyphicon-align-justify" ng-click="openModal(n)"></span>
             <p ng-if="summoners[n].winRate" class="form-control">{{ summoners[n].winRate.toFixed(0) }} %</p>
-            <p ng-if="!summoners[n].winRate" class="form-control">{{ n }}</p>
+            <p ng-if="!summoners[n].winRate" class="form-control">??</p>
         </div>
     </div>
     <!-- End Red Team Mini Stuff ->
     <!-- Red Team Stuff -->
     <div class="hidden-xs red col-sm-4 col-md-3 col-md-offset-1 col-lg-2 col-lg-offset-1 col-xl-2">
         <div ng-repeat="n in [5,6,7,8,9]">
-            <div class="input-group pull-right padded">
+            <div class="input-group pull-right padded ultrawide">
                 <div ng-if="!summoners[n].name" class="input-group in-dd-container">
                     <input type="text" class="form-control" ng-model="names[n]" placeholder="Summoner Name">
                                     <span class="input-group-btn">
