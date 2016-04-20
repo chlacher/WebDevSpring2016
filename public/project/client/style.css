@@ -65,11 +65,12 @@ div.welcome {
     border-style: inset;
     border-color: black;
     font-family: fantasy;
-    position: absolute;
-    right: 1%;
-    width: 30%;
-    height: 4%;
-    bottom: 1%;
+    position: fixed;
+    right: 5px;
+    width: 400px;
+    height: 56px;
+    bottom: 5px;
+    padding-top: 14px;
 }
 
 .greenText {
