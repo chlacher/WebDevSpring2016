@@ -11,7 +11,7 @@
 <!--champion section -->
 <div class="row vertical-align">
     <!-- Blue Team Heads -->
-    <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-md-1 col-md-offset-1 col-xl-offset-2">
+    <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-md-1 col-md-offset-1 col-lg-offset-2 col-xl-offset-2">
         <img ng-repeat="n in [0,1,2,3,4]" class="head pull-right" ng-click="selectChamp(n)" src="{{ summoners[n].icon }}">
     </div>
     <!-- Blue Team Stuff -->
@@ -37,8 +37,8 @@
                         </select>
                     </div>
                     <div class="in pull-left">
-                        <p ng-if="summoners[n].winRate" class="form-control">Win Rate: {{ summoners[n].winRate.toFixed(2) }} %</p>
-                        <p ng-if="!summoners[n].winRate" class="form-control">Win Rate: ????</p>
+                        <p ng-if="summoners[n].winRate" class="form-control">Win: {{ summoners[n].winRate.toFixed(2) }} %</p>
+                        <p ng-if="!summoners[n].winRate" class="form-control">Win: ????</p>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
     </div>
     <!-- End Red Team Mini Stuff ->
     <!-- Red Team Stuff -->
-    <div class="hidden-xs red col-sm-4 col-md-3 col-md-offset-1 col-lg-2 col-xl-2">
+    <div class="hidden-xs red col-sm-4 col-md-3 col-md-offset-1 col-lg-2 col-lg-offset-1 col-xl-2">
         <div ng-repeat="n in [5,6,7,8,9]">
             <div class="input-group pull-right padded">
                 <div ng-if="!summoners[n].name" class="input-group in-dd-container">
@@ -86,8 +86,8 @@
                         </select>
                     </div>
                     <div class="in pull-right">
-                        <p ng-if="summoners[n].winRate" class="form-control">Win Rate: {{ summoners[n].winRate.toFixed(2) }} %</p>
-                        <p ng-if="!summoners[n].winRate" class="form-control">Win Rate: ????</p>
+                        <p ng-if="summoners[n].winRate" class="form-control">Win: {{ summoners[n].winRate.toFixed(2) }} %</p>
+                        <p ng-if="!summoners[n].winRate" class="form-control">Win: ????</p>
                     </div>
                 </div>
             </div>

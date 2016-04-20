@@ -206,7 +206,7 @@ div.welcome {
     width: 100%;
 }
 .in-dd-container > .in {
-    width: 63.337%;
+    width: 50%;
 }
 
 .in-dd-container > .in > p {
@@ -214,7 +214,7 @@ div.welcome {
 }
 
 .in-dd-container > .dd {
-    width: 36.333%;
+    width: 50%;
 }
 
 .left-text > h1 {
