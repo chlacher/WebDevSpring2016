@@ -15,7 +15,7 @@
         <img ng-repeat="n in [0,1,2,3,4]" class="head pull-right" ng-click="selectChamp(n)" src="{{ summoners[n].icon }}">
     </div>
     <!-- Blue Team Stuff -->
-    <div class="hidden-xs blue col-sm-4 col-md-3 col-xl-2">
+    <div class="hidden-xs blue col-sm-4 col-md-3 col-lg-2 col-xl-2">
         <div ng-repeat="n in [0,1,2,3,4]">
             <div class="input-group pull-left padded">
                 <div ng-if="!summoners[n].name" class="input-group in-dd-container">
@@ -64,7 +64,7 @@
     </div>
     <!-- End Red Team Mini Stuff ->
     <!-- Red Team Stuff -->
-    <div class="hidden-xs red col-sm-4 col-md-3 col-md-offset-1 col-xl-2">
+    <div class="hidden-xs red col-sm-4 col-md-3 col-md-offset-1 col-lg-2 col-xl-2">
         <div ng-repeat="n in [5,6,7,8,9]">
             <div class="input-group pull-right padded">
                 <div ng-if="!summoners[n].name" class="input-group in-dd-container">
