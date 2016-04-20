@@ -48,7 +48,7 @@ h1.siteHeader {
 }
 
 .background {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -68,8 +68,8 @@ div.welcome {
     position: absolute;
     right: 1%;
     width: 30%;
+    height: 4%;
     bottom: 1%;
-    padding: 0.5em;
 }
 
 .greenText {
