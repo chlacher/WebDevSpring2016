@@ -22,8 +22,22 @@ function UserService(APIService){
             return APIService.GET("loggedin");
         };
 
-        fac.findAllUsers = function(callback){
-            return APIService.GET("user/");
+        fac.logOut = function(){
+            return APIService.POST("logout", {});
+        };
+
+        fac.register = function(user){
+            return fac.findUserByUsername(user.username).then(function(response){
+                if (response.data){
+                    return null
+                } else {
+                    return APIService.POST("register", user);
+                }
+            });
+        };
+
+        fac.findAllUsers = function(){
+            return APIService.GET("admin/user");
         };
 
         fac.createUser = function(user){
@@ -31,17 +45,21 @@ function UserService(APIService){
                if (response.data){
                    return null
                } else {
-                   return APIService.POST("register", user);
+                   return APIService.POST("admin/user", user);
                }
             });
         };
 
         fac.deleteUserById = function(userId){
-            return APIService.DELETE("user/" + userId);
+            return APIService.DELETE("admin/user/" + userId);
         };
 
-        fac.updateUser = function(userId, user){
-            return APIService.PUT("user/" + userId, user);
+        fac.updateUserById = function(userId, user){
+            return APIService.PUT("admin/user/" + userId, user);
+        };
+
+        fac.updateUser = function(user){
+            return APIService.PUT("user", user);
         };
 
         return fac;

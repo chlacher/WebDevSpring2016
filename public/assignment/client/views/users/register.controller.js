@@ -18,7 +18,7 @@ function RegistrationController($scope, $location, $rootScope, UserService) {
         }
 
         var user = {"username":$scope.username, "password":$scope.password, "email":$scope.email};
-        UserService.createUser(user).then(function (response) {
+        UserService.register(user).then(function (response) {
                 if (response && response.data) {
                     // Log in the new user
                     UserService.login($scope.username, $scope.password).then(function (response) {

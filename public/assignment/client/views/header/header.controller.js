@@ -7,7 +7,12 @@ angular
 
 function HeaderController($scope, $location, $rootScope, UserService) {
     $scope.logout = function(){
-        $rootScope.user = null;
-        $location.path('/home');
+        UserService.logOut().then(
+            function(resp){
+                $rootScope.user = null;
+                $location.path('/home');
+            }
+        );
+
     }
 }

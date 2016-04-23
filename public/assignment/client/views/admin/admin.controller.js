@@ -37,7 +37,7 @@ function AdminController($scope, UserService) {
         if (user.roles.split) {
             user.roles = user.roles.replace(/ /g, '').split(',');
         }
-        UserService.updateUser(user._id, user).then(function(response){
+        UserService.updateUserById(user._id, user).then(function(response){
             if (response.data){
                 $scope.editFlag = '';
             }

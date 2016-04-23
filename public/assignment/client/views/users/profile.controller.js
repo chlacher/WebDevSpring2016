@@ -37,7 +37,7 @@ function ProfileController($scope, $rootScope, UserService) {
         }};
 
         var updateUser = function(user) {
-            UserService.updateUser(user._id, user).then(function (response) {
+            UserService.updateUser(user).then(function (response) {
                 if (response.data) {
                     $rootScope.user = response.data;
                 }
