@@ -1,12 +1,38 @@
 module.exports = function (app, model) {
 
+    var passport = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+    passport.use(new LocalStrategy(strategy));
+
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
     app.get("/api/assignment/user/", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
     app.get("/api/assignment/user/name/:username", getUserByUsername);
-    app.get("/api/assignment/user/creds/:username/:password", getUserByCredentials);
+    app.post('/api/assignment/user/login', passport.authenticate('local'), login);
     app.post("/api/assignment/user/", createUser);
     app.put("/api/assignment/user/:id", updateUserById);
     app.delete("/api/assignment/user/:id", deleteUserById);
+
+    function strategy(username, password, next) {
+        model.findUserByCredentials({username: username, password: password}, function(user){
+            if (user) {
+                return next(null, user);
+            }
+            return next(null, false);
+        });
+    }
+
+    function serializeUser(user, next) {
+        next(null, user);
+    }
+
+    function deserializeUser(user, next) {
+        model.findUserById(user._id, function (user) {
+            next(null, user);
+        });
+    }
 
     function getAllUsers (req, res) {
         model.findAllUsers(function(users){
@@ -28,12 +54,9 @@ module.exports = function (app, model) {
         });
     }
 
-    function getUserByCredentials(req, res) {
-        var u = req.params.username;
-        var p = req.params.password;
-        model.findUserByCredentials({username: u, password: p}, function(user){
-            res.json(user);
-        });
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
     }
 
     function createUser (req, res) {

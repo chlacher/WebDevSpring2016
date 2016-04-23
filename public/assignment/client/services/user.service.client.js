@@ -10,8 +10,12 @@ function UserService(APIService){
             return APIService.GET("user/name/" + username);
         };
 
-        fac.findUserByCredentials = function(username, password){
-            return APIService.GET("user/creds/" + username + "/" + password);
+        fac.login = function(username, password){
+            var user = {
+                username: username,
+                password: password
+            };
+            return APIService.POST("user/login/", user);
         };
 
         fac.findAllUsers = function(callback){

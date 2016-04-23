@@ -21,7 +21,7 @@ function RegistrationController($scope, $location, $rootScope, UserService) {
         UserService.createUser(user).then(function (response) {
                 if (response && response.data) {
                     // Log in the new user
-                    UserService.findUserByCredentials($scope.username, $scope.password).then(function (response) {
+                    UserService.login($scope.username, $scope.password).then(function (response) {
                         if (response.data) {
                             $rootScope.user = response.data;
                             $location.path('/profile');

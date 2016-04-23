@@ -8,7 +8,7 @@ angular
 function LoginController($scope, $location, $rootScope, UserService) {
 
     $scope.login = function () {
-        UserService.findUserByCredentials($scope.username, $scope.password).then(function (response) {
+        UserService.login($scope.username, $scope.password).then(function (response) {
             if (response.data) {
                 $rootScope.user = response.data;
                 $location.path('/profile');
