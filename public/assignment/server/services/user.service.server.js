@@ -10,7 +10,10 @@ module.exports = function (app, model) {
     app.get("/api/assignment/user/", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
     app.get("/api/assignment/user/name/:username", getUserByUsername);
-    app.post('/api/assignment/user/login', passport.authenticate('local'), login);
+    app.post('/api/assignment/login', passport.authenticate('local'), login);
+    app.get('/api/assignment/loggedin', loggedIn);
+    app.post('/api/assignment/logout', logOut);
+    app.post('/api/assignment/register', register);
     app.post("/api/assignment/user/", createUser);
     app.put("/api/assignment/user/:id", updateUserById);
     app.delete("/api/assignment/user/:id", deleteUserById);
@@ -56,7 +59,35 @@ module.exports = function (app, model) {
 
     function login(req, res) {
         var user = req.user;
-        res.json(user);
+        req.login(user, function(err){
+            if (err){
+                res.json(400).send(err);
+            } else {
+                res.json(user);
+            }
+        });
+    }
+
+    function loggedIn(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function logOut(req, res){
+        req.logOut();
+        res.send(200);
+    }
+
+    function register (req, res) {
+        var user = req.body;
+        model.createUser(user, function(newUser){
+            req.login(newUser, function(err){
+                if (err){
+                    res.json(400).send(err);
+                } else {
+                    res.json(newUser);
+                }
+            });
+        });
     }
 
     function createUser (req, res) {

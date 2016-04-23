@@ -15,7 +15,11 @@ function UserService(APIService){
                 username: username,
                 password: password
             };
-            return APIService.POST("user/login/", user);
+            return APIService.POST("login", user);
+        };
+
+        fac.loggedIn = function(){
+            return APIService.GET("loggedin");
         };
 
         fac.findAllUsers = function(callback){
@@ -27,7 +31,7 @@ function UserService(APIService){
                if (response.data){
                    return null
                } else {
-                   return APIService.POST("user/", user);
+                   return APIService.POST("register", user);
                }
             });
         };
