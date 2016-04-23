@@ -29,17 +29,14 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 db.connect(connectionString);
 
 // Initialize Session/Auth
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(cookieParser());
 app.use(session({
     secret: "spaghettiisdelicious",
     resave: true,
     saveUninitialized: true
 }));
-
-
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Client
 app.use(express.static(__dirname + '/public/'));
