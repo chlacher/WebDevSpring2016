@@ -3,8 +3,10 @@ var express = require('express');
 // Assignment
 var app = express();
 
-// Auth
+// Ssession
 var passport = require('passport');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 // Body Parser: Needed for API Put
 var bodyParser = require('body-parser');
@@ -26,8 +28,18 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 
 db.connect(connectionString);
 
-// Initialize Auth
+// Initialize Session/Auth
 app.use(passport.initialize());
+app.use(passport.session());
+app.use(cookieParser());
+app.use(session({
+    secret: "spaghettiisdelicious",
+    resave: true,
+    saveUninitialized: true
+}));
+
+
+
 
 // Client
 app.use(express.static(__dirname + '/public/'));
